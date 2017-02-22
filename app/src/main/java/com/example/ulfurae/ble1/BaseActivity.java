@@ -39,6 +39,9 @@ public class BaseActivity extends AppCompatActivity {
             case "Profile":
                 viewProfile(item.getActionView());
                 return true;
+            case "Add Exercise":
+                viewAddExercise(item.getActionView());
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -64,5 +67,9 @@ public class BaseActivity extends AppCompatActivity {
         TextView bmiTxt = (TextView) findViewById(R.id.bmi);
         bmiTxt.setText(Integer.toString(testUser.getBMI()));
 
+    }
+    
+    public void viewAddExercise(View view) {
+        setContentView(R.layout.activity_addexercise);
     }
 }
