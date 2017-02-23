@@ -69,7 +69,8 @@
         android:layout_marginTop="11dp"
         android:layout_below="@+id/addexercise_btn"
         android:layout_alignParentStart="true"
-        android:elevation="0dp" />
+        android:elevation="0dp"
+        android:onClick="viewAddGoal" />
 
     <Button
         android:layout_width="match_parent"

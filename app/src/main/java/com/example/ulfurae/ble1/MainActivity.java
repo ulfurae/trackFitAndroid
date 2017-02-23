@@ -43,4 +43,11 @@ public class MainActivity extends MenuActivity {
 
         setContentView(R.layout.activity_addexercise);
     }
+
+
+    public void viewAddGoal(View view) {
+
+        setContentView(R.layout.activity_addgoal);
+    }
 }
+
