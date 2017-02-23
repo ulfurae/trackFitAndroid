@@ -1,6 +1,5 @@
 package com.example.ulfurae.ble1;
 
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import java.util.Date;
 
 import entities.User;
-import entities.UserExercise;
 
 /**
  * Created by ulfurae on 18.2.2017.
@@ -19,7 +17,7 @@ import entities.UserExercise;
 
 // A class that adds a menu in all activities
 // All other activities extended this class to have the menu
-public class BaseActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
 
     // Activity code here
 
@@ -40,8 +38,8 @@ public class BaseActivity extends AppCompatActivity {
             case "Profile":
                 viewProfile(item.getActionView());
                 return true;
-            case "Add Exercise":
-                viewAddExercise(item.getActionView());
+            case "Log out":
+                // log out stuff
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -69,31 +67,4 @@ public class BaseActivity extends AppCompatActivity {
         bmiTxt.setText(Integer.toString(testUser.getBMI()));
     }
 
-    /* Called when the user clicks exerciselog_btn */
-    public void viewExerciseLog(View view) {
-
-    //    UserExercise testUserExercise = new UserExercise("testUser", "ble", "Tester Testersson", new Date(), 180, 85);
-    //    System.out.println("dewdw");
-    //    System.out.println(testUser);
-
-        setContentView(R.layout.activity_exerciselog);
-
-
-    }
-
-    /* Called when the user clicks exerciselog_btn */
-    public void viewGoalLog(View view) {
-
-        //    UserExercise testUserExercise = new UserExercise("testUser", "ble", "Tester Testersson", new Date(), 180, 85);
-        //    System.out.println("dewdw");
-        //    System.out.println(testUser);
-
-        setContentView(R.layout.activity_goallog);
-
-
-    }
-    
-    public void viewAddExercise(View view) {
-        setContentView(R.layout.activity_addexercise);
-    }
 }

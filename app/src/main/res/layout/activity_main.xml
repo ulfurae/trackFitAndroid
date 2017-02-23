@@ -29,7 +29,7 @@
         android:text="Profile"
         android:fontFamily="sans-serif"
         android:textAllCaps="false"
-        android:onClick="viewProfile (BaseActivity)" />
+        android:onClick="viewProfile" />
 
     <Button
         android:layout_width="match_parent"
@@ -48,7 +48,8 @@
         android:textAllCaps="false"
         android:layout_below="@+id/profile_btn"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="11dp" />
+        android:layout_marginTop="11dp"
+        android:onClick="viewAddExercise" />
 
     <Button
         android:layout_width="match_parent"
@@ -88,7 +89,7 @@
         android:layout_marginTop="11dp"
         android:layout_below="@+id/addgoal_btn"
         android:layout_alignParentStart="true"
-        android:onClick="viewExerciseLog (BaseActivity)" />
+        android:onClick="viewExerciseLog" />
 
     <Button
         android:layout_width="match_parent"
@@ -108,5 +109,5 @@
         android:layout_marginTop="11dp"
         android:layout_below="@+id/exerciselog_btn"
         android:layout_alignParentStart="true"
-        android:onClick="viewGoalLog (BaseActivity)" />
+        android:onClick="viewGoalLog" />
 </RelativeLayout>
