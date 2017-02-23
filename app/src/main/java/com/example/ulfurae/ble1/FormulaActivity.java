@@ -14,6 +14,6 @@ public class FormulaActivity {
     }
 
     public boolean ProgressCal(int[] unit, int[] unitGoal) {
-
+        return true;
     }
 }
