@@ -18,33 +18,27 @@ public class MainActivity extends MenuActivity {
     /* Called when the user clicks exerciselog_btn */
     public void viewExerciseLog(View view) {
 
-        //    UserExercise testUserExercise = new UserExercise("testUser", "ble", "Tester Testersson", new Date(), 180, 85);
-        //    System.out.println("dewdw");
-        //    System.out.println(testUser);
-
         setContentView(R.layout.activity_exerciselog);
 
 
     }
 
-    /* Called when the user clicks exerciselog_btn */
+    /* Called when the user clicks goallog_btn */
     public void viewGoalLog(View view) {
-
-        //    UserExercise testUserExercise = new UserExercise("testUser", "ble", "Tester Testersson", new Date(), 180, 85);
-        //    System.out.println("dewdw");
-        //    System.out.println(testUser);
 
         setContentView(R.layout.activity_goallog);
 
 
     }
 
+    /*Called when the user clicks addexercise_btn  */
     public void viewAddExercise(View view) {
 
         setContentView(R.layout.activity_addexercise);
     }
 
 
+    /*Called when the user clicks addgoal_btn */
     public void viewAddGoal(View view) {
 
         setContentView(R.layout.activity_addgoal);
