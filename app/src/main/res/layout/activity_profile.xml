@@ -90,6 +90,15 @@
             android:text="..."
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
 
+        <Button
+            android:id="@+id/changeweight_btn"
+            style="@style/Widget.AppCompat.Button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:text="Change Weight"
+            android:fontFamily="sans-serif"
+            android:onClick="viewChangeWeight"
+            android:textAllCaps="false"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

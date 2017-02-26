@@ -1,10 +1,18 @@
 package com.example.ulfurae.ble1;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 
 public class MainActivity extends MenuActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -12,7 +20,12 @@ public class MainActivity extends MenuActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /* Called when the user clicks changeweight_btn */
+    public void viewChangeWeight(View view) {
 
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
 
 
     /* Called when the user clicks exerciselog_btn */
@@ -43,5 +56,6 @@ public class MainActivity extends MenuActivity {
 
         setContentView(R.layout.activity_addgoal);
     }
+
 }
 
