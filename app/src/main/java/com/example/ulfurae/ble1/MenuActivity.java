@@ -10,6 +10,9 @@ import android.widget.TextView;
 import java.util.Date;
 
 import entities.User;
+import entities.BMI;
+
+import static com.example.ulfurae.ble1.FormulaActivity.*;
 
 /**
  * Created by ulfurae on 18.2.2017.
@@ -53,6 +56,8 @@ public class MenuActivity extends AppCompatActivity {
         System.out.println("dewdw");
         System.out.println(testUser);
 
+        BMI bmi = FormulaActivity.BMICalculate(testUser.getHeight(), testUser.getWeight());
+
         setContentView(R.layout.activity_profile);
 
         TextView nameTxt = (TextView) findViewById(R.id.name);
@@ -64,7 +69,9 @@ public class MenuActivity extends AppCompatActivity {
         TextView weightTxt = (TextView) findViewById(R.id.weight);
         weightTxt.setText(Integer.toString(testUser.getWeight()));
         TextView bmiTxt = (TextView) findViewById(R.id.bmi);
-        bmiTxt.setText(Integer.toString(testUser.getBMI()));
+        bmiTxt.setText(Double.toString(bmi.getBMIIndex()));
+        TextView bmiIdealTxt = (TextView) findViewById(R.id.bmiIdeal);
+        bmiIdealTxt.setText(bmi.getIdealWeight());
     }
 
 }

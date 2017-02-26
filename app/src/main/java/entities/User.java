@@ -15,7 +15,6 @@ public class User {
 
     private int height;
     private int weight;
-    private int BMI;
 
     public User() { }
     
@@ -82,14 +81,6 @@ public class User {
 
 	public void setWeight(int weight) {
 		this.weight = weight;
-	}
-
-	public int getBMI() {
-		return BMI;
-	}
-
-	public void setBMI(int BMI) {
-		this.BMI = BMI;
 	}
 
 }

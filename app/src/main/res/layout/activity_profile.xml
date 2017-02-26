@@ -105,6 +105,13 @@
             android:id="@+id/bmi"
             android:text="..."
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bmiIdeal"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
     </GridLayout>
 
 </RelativeLayout>
