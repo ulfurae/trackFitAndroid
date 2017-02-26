@@ -93,7 +93,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BMI"
+            android:text="BMI:"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
             android:layout_row="4"
             android:layout_column="0"
@@ -105,6 +105,15 @@
             android:id="@+id/bmi"
             android:text="..."
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You are:"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
