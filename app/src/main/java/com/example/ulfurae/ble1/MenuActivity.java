@@ -1,5 +1,6 @@
 package com.example.ulfurae.ble1;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +47,8 @@ public class MenuActivity extends AppCompatActivity {
 
         switch (item.getTitle().toString()) {
             case "Home":
-                setContentView(R.layout.activity_main);
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 return true;
             case "Profile":
                 viewProfile(item.getActionView());

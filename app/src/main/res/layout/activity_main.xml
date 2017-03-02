@@ -35,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="@android:dimen/notification_large_icon_width"
         android:id="@+id/addexercise_btn"
-        style="@style/Widget.AppCompat.Button"
         android:textAppearance="@style/TextAppearance.AppCompat.Button"
         android:background="@color/colorPrimary"
         android:autoText="false"
