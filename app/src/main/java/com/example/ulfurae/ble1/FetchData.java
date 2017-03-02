@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import entities.User;
 
@@ -45,18 +49,16 @@ public class FetchData {
         return new String(getUrlBytes(urlSpec));
     }
 
-    public static User parseUser(User user, JSONObject jsonBody) throws JSONException {
+    public static User parseUser(User user, JSONObject jsonBody) throws JSONException, ParseException {
         Log.i("Bla","Við erum hér");
 
         String name = jsonBody.getString("fullName");
-        //String birthdayString = jsonBody.getString("birthday");
+        String birthday = jsonBody.getString("birthday");
         int height = jsonBody.getInt("height");
         int weight = jsonBody.getInt("weight");
 
-        //Date birthday = new Date(birthdayString);
-
         user.setFullName(name);
-        //user.setBirthday(birthday);
+        user.setBirthday(birthday);
         user.setHeight(height);
         user.setWeight(weight);
 

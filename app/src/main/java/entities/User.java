@@ -11,14 +11,14 @@ public class User {
     private String username;
     private String pass; 
     private String fullName;
-    private Date birthday;
+    private String birthday;
 
     private int height;
     private int weight;
 
     public User() { }
     
-    public User(String username, String pass, String fullName, Date birthday, int height, int weight) {
+    public User(String username, String pass, String fullName, String birthday, int height, int weight) {
         this.username = username;
     	this.pass = pass;
         this.fullName = fullName;
@@ -60,10 +60,10 @@ public class User {
 		this.fullName = fullName;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 

@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 
 import entities.User;
@@ -59,7 +60,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     /* Called when the user clicks profile_btn or 'Profile' in menu*/
-    public void viewProfile(View view) {
+    public void viewProfile(View view)  {
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -83,6 +84,8 @@ public class MenuActivity extends AppCompatActivity {
             Log.e("FetchData", "Failed to fetch items", ioe);
         } catch (JSONException je) {
             Log.e("FetchData","Failed to parse JSON", je);
+        } catch(ParseException pe) {
+            Log.e("FetchData", "Failed to parse date", pe);
         }
 
         setContentView(R.layout.activity_profile);
@@ -95,10 +98,11 @@ public class MenuActivity extends AppCompatActivity {
 
         BMI bmi = FormulaActivity.BMICalculate(user.getHeight(), user.getWeight());
 
+
         TextView nameTxt = (TextView) findViewById(R.id.name);
         nameTxt.setText(user.getFullName());
-        //TextView birthdayTxt = (TextView) findViewById(R.id.birthday);
-        //birthdayTxt.setText(Integer.toString(user.getBirthday().getDate()));
+        TextView birthdayTxt = (TextView) findViewById(R.id.birthday);
+        birthdayTxt.setText(user.getBirthday());
         TextView heightTxt = (TextView) findViewById(R.id.height);
         heightTxt.setText(Integer.toString(user.getHeight()));
         TextView weightTxt = (TextView) findViewById(R.id.weight);
