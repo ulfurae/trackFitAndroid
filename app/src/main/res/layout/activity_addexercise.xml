@@ -9,7 +9,8 @@
         android:layout_height="wrap_content" />
 
     <Spinner
-        android:layout_width="128dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/exercise" />
+        android:id="@+id/exerciseSpinner"
+        android:spinnerMode="dropdown"/>
 </LinearLayout>

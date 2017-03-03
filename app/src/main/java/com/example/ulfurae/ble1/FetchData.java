@@ -15,8 +15,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import entities.Exercise;
 import entities.User;
 
 /**
@@ -50,7 +52,7 @@ public class FetchData {
     }
 
     public static User parseUser(User user, JSONObject jsonBody) throws JSONException, ParseException {
-        Log.i("Bla","Við erum hér");
+        Log.i("Parse","User");
 
         String name = jsonBody.getString("fullName");
         String birthday = jsonBody.getString("birthday");
@@ -63,6 +65,17 @@ public class FetchData {
         user.setWeight(weight);
 
         return user;
+    }
+
+    public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray) throws JSONException, ParseException {
+        Log.i("Parse","Exercise");
+        for (int i=0; i < jsonArray.length(); i++) {
+            JSONObject oneObject = jsonArray.getJSONObject(i);
+            String name = oneObject.getString("name");
+            exercises.add(name);
+        }
+
+        return exercises;
     }
 
 }
