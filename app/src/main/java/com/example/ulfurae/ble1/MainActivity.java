@@ -20,14 +20,6 @@ public class MainActivity extends MenuActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /* Called when the user clicks changeweight_btn */
-    public void viewChangeWeight(View view) {
-
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
-
-
     /* Called when the user clicks exerciselog_btn */
     public void viewExerciseLog(View view) {
 

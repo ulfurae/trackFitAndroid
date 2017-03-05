@@ -54,11 +54,13 @@ public class FetchData {
     public static User parseUser(User user, JSONObject jsonBody) throws JSONException, ParseException {
         Log.i("Parse","User");
 
+        String userName = jsonBody.getString("username");
         String name = jsonBody.getString("fullName");
         String birthday = jsonBody.getString("birthday");
         int height = jsonBody.getInt("height");
         int weight = jsonBody.getInt("weight");
 
+        user.setUsername(userName);
         user.setFullName(name);
         user.setBirthday(birthday);
         user.setHeight(height);
