@@ -25,20 +25,23 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:hint="weight" />
+        android:hint="reps"
+        android:id="@+id/repetitions"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:hint="reps" />
+        android:hint="weight"
+        android:id="@+id/weightLifted"/>
 
     <Button
         android:text="Save Exercise"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/saveExercise" />
+        android:id="@+id/saveExercise"
+        android:onClick="addExercise"/>
 
     <Button
         android:text="Exercise Log"

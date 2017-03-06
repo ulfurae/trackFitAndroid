@@ -51,18 +51,10 @@ public class ChangeProfileActivity extends MenuActivity {
                     .build().toString();
             Log.i("Urlið", url);
             String jsonString = FetchData.getUrlString(url);
-            Log.i("FetchData","Received JSON: "+jsonString);
-            JSONObject jsonBody = new JSONObject(jsonString);
-            Log.i("FetchData", "Received JSON Object: "+jsonBody);
-            user = FetchData.parseUser(user, jsonBody);
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         } catch(IOException ioe) {
             Log.e("FetchData", "Failed to fetch items", ioe);
-        } catch (JSONException je) {
-            Log.e("FetchData","Failed to parse JSON", je);
-        } catch(ParseException pe) {
-            Log.e("FetchData", "Failed to parse date", pe);
         }
 
     }

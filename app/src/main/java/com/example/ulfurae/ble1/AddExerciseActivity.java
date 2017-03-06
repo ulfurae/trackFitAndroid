@@ -1,15 +1,20 @@
 package com.example.ulfurae.ble1;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONStringer;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -63,5 +68,45 @@ public class AddExerciseActivity extends MenuActivity{
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, exercises);
         spinner.setAdapter(adapter);
 
+    }
+
+    public void addExercise(View view) {
+
+        EditText repetitionsTxt = (EditText) findViewById(R.id.repetitions);
+        String stringRepetitions = repetitionsTxt.getText().toString();
+
+        EditText weightLiftedTxt = (EditText) findViewById(R.id.weightLifted);
+        String stringWeightLifted = weightLiftedTxt.getText().toString();
+
+        Spinner exerciseTxt = (Spinner) findViewById(R.id.exerciseSpinner);
+        String exercise = exerciseTxt.getSelectedItem().toString();
+
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        try {
+            String url = Uri.parse("http://10.0.2.2:8080/addExercise?")
+                    .buildUpon()
+                    .appendQueryParameter("userName","tester2")
+                    .appendQueryParameter("goalID","0")
+                    .appendQueryParameter("exercise",exercise)
+                    .appendQueryParameter("rep",stringRepetitions)
+                    .appendQueryParameter("amount",stringWeightLifted)
+                    .build().toString();
+            Log.i("Urlið", url);
+            String jsonString = FetchData.getUrlString(url);
+            if(jsonString.equals("true")){
+                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                repetitionsTxt.setText("");
+                weightLiftedTxt.setText("");
+            } else {
+                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch(IOException ioe) {
+            Log.e("FetchData", "Failed to fetch items", ioe);
+        }
     }
 }
