@@ -30,6 +30,9 @@ public class ProfileActivity extends MenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle extras = getIntent().getExtras();
+        String userName = extras.getString("Username");
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -38,7 +41,7 @@ public class ProfileActivity extends MenuActivity {
         try {
             String url = Uri.parse("http://10.0.2.2:8080/profile?")
                     .buildUpon()
-                    .appendQueryParameter("name","tester2")
+                    .appendQueryParameter("name",userName)
                     .build().toString();
             Log.i("Urlið", url);
             String jsonString = FetchData.getUrlString(url);

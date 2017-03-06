@@ -13,6 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends MenuActivity {
 
+    String loggedInUser = "tester2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class MainActivity extends MenuActivity {
     /*Called when the user clicks addexercise_btn  */
     public void viewAddExercise(View view) {
         Intent intent = new Intent(this, AddExerciseActivity.class);
+        intent.putExtra("Username",loggedInUser);
         startActivity(intent);
     }
 
@@ -48,6 +50,7 @@ public class MainActivity extends MenuActivity {
     public void viewAddGoal(View view) {
 
         Intent intent = new Intent(this, AddGoalActivity.class);
+        intent.putExtra("Username",loggedInUser);
         startActivity(intent);
     }
 

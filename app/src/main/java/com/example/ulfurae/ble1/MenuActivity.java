@@ -33,8 +33,9 @@ import static com.example.ulfurae.ble1.FormulaActivity.*;
 // All other activities extended this class to have the menu
 public class MenuActivity extends AppCompatActivity {
 
-    // Activity code here
+    String loggedInUser = "tester2";
 
+    // / Activity code here
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -65,6 +66,7 @@ public class MenuActivity extends AppCompatActivity {
     public void viewProfile(View view)  {
 
         Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("Username",loggedInUser);
         startActivity(intent);
 
     }

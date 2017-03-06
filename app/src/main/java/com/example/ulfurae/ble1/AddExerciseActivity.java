@@ -81,6 +81,9 @@ public class AddExerciseActivity extends MenuActivity{
         Spinner exerciseTxt = (Spinner) findViewById(R.id.exerciseSpinner);
         String exercise = exerciseTxt.getSelectedItem().toString();
 
+        Bundle extras = getIntent().getExtras();
+        String userName = extras.getString("Username");
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -89,7 +92,7 @@ public class AddExerciseActivity extends MenuActivity{
         try {
             String url = Uri.parse("http://10.0.2.2:8080/addExercise?")
                     .buildUpon()
-                    .appendQueryParameter("userName","tester2")
+                    .appendQueryParameter("userName",userName)
                     .appendQueryParameter("goalID","0")
                     .appendQueryParameter("exercise",exercise)
                     .appendQueryParameter("rep",stringRepetitions)
