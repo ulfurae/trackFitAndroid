@@ -1,17 +1,28 @@
 package com.example.ulfurae.ble1;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Date;
 
 import entities.User;
 import entities.BMI;
 
+
+import static com.example.ulfurae.ble1.FetchData.*;
 import static com.example.ulfurae.ble1.FormulaActivity.*;
 
 /**
@@ -22,8 +33,9 @@ import static com.example.ulfurae.ble1.FormulaActivity.*;
 // All other activities extended this class to have the menu
 public class MenuActivity extends AppCompatActivity {
 
-    // Activity code here
+    String loggedInUser = "tester2";
 
+    // / Activity code here
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -36,7 +48,8 @@ public class MenuActivity extends AppCompatActivity {
 
         switch (item.getTitle().toString()) {
             case "Home":
-                setContentView(R.layout.activity_main);
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 return true;
             case "Profile":
                 viewProfile(item.getActionView());
@@ -50,28 +63,12 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     /* Called when the user clicks profile_btn or 'Profile' in menu*/
-    public void viewProfile(View view) {
+    public void viewProfile(View view)  {
 
-        User testUser = new User("testUser", "ble", "Tester Testersson", new Date(), 180, 85);
-        System.out.println("dewdw");
-        System.out.println(testUser);
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("Username",loggedInUser);
+        startActivity(intent);
 
-        BMI bmi = FormulaActivity.BMICalculate(testUser.getHeight(), testUser.getWeight());
-
-        setContentView(R.layout.activity_profile);
-
-        TextView nameTxt = (TextView) findViewById(R.id.name);
-        nameTxt.setText(testUser.getFullName());
-        TextView birthdayTxt = (TextView) findViewById(R.id.birthday);
-        birthdayTxt.setText(Integer.toString(testUser.getBirthday().getDate()));
-        TextView heightTxt = (TextView) findViewById(R.id.height);
-        heightTxt.setText(Integer.toString(testUser.getHeight()));
-        TextView weightTxt = (TextView) findViewById(R.id.weight);
-        weightTxt.setText(Integer.toString(testUser.getWeight()));
-        TextView bmiTxt = (TextView) findViewById(R.id.bmi);
-        bmiTxt.setText(Double.toString(bmi.getBMIIndex()));
-        TextView bmiIdealTxt = (TextView) findViewById(R.id.bmiIdeal);
-        bmiIdealTxt.setText(bmi.getIdealWeight());
     }
 
 }
