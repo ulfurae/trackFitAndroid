@@ -60,7 +60,8 @@
         android:text="Save Goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/saveGoal" />
+        android:id="@+id/saveGoal"
+        android:onClick="addGoal" />
 
     <Button
         android:text="Goal Log"
