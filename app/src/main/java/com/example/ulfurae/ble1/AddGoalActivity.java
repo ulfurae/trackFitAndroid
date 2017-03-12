@@ -1,15 +1,22 @@
 package com.example.ulfurae.ble1;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.view.View.OnClickListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,8 +28,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import entities.Exercise;
 
@@ -31,15 +40,26 @@ import entities.Exercise;
  * Created by heidrunh on 2.3.2017.
  */
 
-public class AddGoalActivity extends MenuActivity {
+public class AddGoalActivity extends MenuActivity implements OnClickListener {
 
     private Spinner spinner;
     private static List<String> exercisesList = new ArrayList<String>();
+    private DatePickerDialog fromDatePickerDialog;
+    private DatePickerDialog toDatePickerDialog;
+    private SimpleDateFormat dateFormat;
+    private EditText fromDateEditText;
+    private EditText toDateEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addgoal);
+
+        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+        findViewsById();
+
+        setDateTimeField();
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new
@@ -71,6 +91,51 @@ public class AddGoalActivity extends MenuActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, exercises);
         spinner.setAdapter(adapter);
+    }
+
+    private void findViewsById() {
+        fromDateEditText = (EditText) findViewById(R.id.startDate);
+        fromDateEditText.setInputType(InputType.TYPE_NULL);
+        //fromDateEditText.requestFocus();
+
+        toDateEditText = (EditText) findViewById(R.id.endDate);
+        toDateEditText.setInputType(InputType.TYPE_NULL);
+
+    }
+
+    private void setDateTimeField() {
+        fromDateEditText.setOnClickListener(this);
+        toDateEditText.setOnClickListener(this);
+
+        Calendar newCalendar = Calendar.getInstance();
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                fromDateEditText.setText(dateFormat.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        toDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                toDateEditText.setText(dateFormat.format(newDate.getTime()));
+            }
+
+        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == fromDateEditText) {
+            fromDatePickerDialog.show();
+        } else if(view == toDateEditText) {
+            toDatePickerDialog.show();
+        }
     }
 
     public void addGoal(View view) {
@@ -107,6 +172,7 @@ public class AddGoalActivity extends MenuActivity {
                     .appendQueryParameter("amount",stringgoalWeight)
                     .appendQueryParameter("startDate",stringstartDate)
                     .appendQueryParameter("endDate",stringendDate)
+                    .appendQueryParameter("status", "Not completed")
                     .build().toString();
             Log.i("Urlið",url);
             String jsonString = FetchData.getUrlString(url);

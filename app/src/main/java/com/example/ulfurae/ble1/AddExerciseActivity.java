@@ -19,6 +19,7 @@ import org.json.JSONStringer;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import entities.Exercise;
@@ -83,6 +84,8 @@ public class AddExerciseActivity extends MenuActivity{
 
         Bundle extras = getIntent().getExtras();
         String userName = extras.getString("Username");
+
+        Date dagsetning = new Date();
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

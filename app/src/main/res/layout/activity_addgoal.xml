@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/goalLayout">
 
     <TextView
         android:text="Choose exercise:"
@@ -25,7 +26,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:hint="reps"
-        android:id="@+id/repetitions" />
+        android:id="@+id/repetitions"
+        android:imeOptions="actionDone"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -33,7 +35,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:hint="weight"
-        android:id="@+id/goalWeight" />
+        android:id="@+id/goalWeight"
+        android:imeOptions="actionDone"/>
 
     <TextView
         android:text="Start and End date:"
