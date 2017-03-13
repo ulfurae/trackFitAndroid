@@ -14,12 +14,14 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import entities.Exercise;
 import entities.User;
+import entities.UserExercise;
 
 /**
  * Created by heidrunh on 2.3.2017.
@@ -67,6 +69,25 @@ public class FetchData {
         user.setWeight(weight);
 
         return user;
+    }
+
+    public static List<UserExercise> parseUserExercise(String jsonString) throws JSONException, ParseException {
+        Log.i("Parse","UserExercise");
+
+        List<UserExercise> uExercise = new ArrayList<>();
+        JSONArray jsonResults = new JSONArray(jsonString);
+
+        for (int i=0; i<jsonResults.length(); i++) {
+            JSONObject jsonResult = jsonResults.getJSONObject(i);
+            uExercise.add(new UserExercise(
+                    jsonResult.getLong("userGoalID"),
+                    jsonResult.getLong("userID"),
+                    jsonResult.getLong("exerciseID"),
+                    jsonResult.getInt("unit1"),
+                    jsonResult.getInt("unit2"),
+                    jsonResult.getDate("date")
+            ));
+        }
     }
 
     public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray) throws JSONException, ParseException {
