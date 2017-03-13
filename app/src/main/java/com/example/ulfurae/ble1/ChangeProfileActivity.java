@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +52,15 @@ public class ChangeProfileActivity extends MenuActivity {
                     .build().toString();
             Log.i("Urlið", url);
             String jsonString = FetchData.getUrlString(url);
-            Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
+
+            if(jsonString.equals("true")){
+                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, ProfileActivity.class);
+                intent.putExtra("Username",userName);
+                startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_SHORT).show();
+            }
         } catch(IOException ioe) {
             Log.e("FetchData", "Failed to fetch items", ioe);
         }
