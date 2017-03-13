@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,21 +68,35 @@ public class ProfileActivity extends MenuActivity {
         System.out.println("dewdw");
         System.out.println(testUser);*/
 
-        BMI bmi = FormulaActivity.BMICalculate(user.getHeight(), user.getWeight());
+        String isUserFound = user.getUsername();
 
+        if(isUserFound != "null") {
+            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
-        TextView nameTxt = (TextView) findViewById(R.id.name);
-        nameTxt.setText(user.getFullName());
-        TextView birthdayTxt = (TextView) findViewById(R.id.birthday);
-        birthdayTxt.setText(user.getBirthday());
-        TextView heightTxt = (TextView) findViewById(R.id.height);
-        heightTxt.setText(Integer.toString(user.getHeight()));
-        TextView weightTxt = (TextView) findViewById(R.id.weight);
-        weightTxt.setText(Integer.toString(user.getWeight()));
-        TextView bmiTxt = (TextView) findViewById(R.id.bmi);
-        bmiTxt.setText(Double.toString(bmi.getBMIIndex()));
-        TextView bmiIdealTxt = (TextView) findViewById(R.id.bmiIdeal);
-        bmiIdealTxt.setText(bmi.getIdealWeight());
+            Button changeWeightButton = (Button) findViewById(R.id.changeweight_btn);
+            changeWeightButton.setEnabled(true);
+
+            BMI bmi = FormulaActivity.BMICalculate(user.getHeight(), user.getWeight());
+
+            TextView nameTxt = (TextView) findViewById(R.id.name);
+            nameTxt.setText(user.getFullName());
+            TextView birthdayTxt = (TextView) findViewById(R.id.birthday);
+            birthdayTxt.setText(user.getBirthday());
+            TextView heightTxt = (TextView) findViewById(R.id.height);
+            heightTxt.setText(Integer.toString(user.getHeight()));
+            TextView weightTxt = (TextView) findViewById(R.id.weight);
+            weightTxt.setText(Integer.toString(user.getWeight()));
+            TextView bmiTxt = (TextView) findViewById(R.id.bmi);
+            bmiTxt.setText(Double.toString(bmi.getBMIIndex()));
+            TextView bmiIdealTxt = (TextView) findViewById(R.id.bmiIdeal);
+            bmiIdealTxt.setText(bmi.getIdealWeight());
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "No user found", Toast.LENGTH_SHORT).show();
+            Button changeWeightButton = (Button) findViewById(R.id.changeweight_btn);
+            changeWeightButton.setEnabled(false);
+        }
+
     }
 
     /* Called when the user clicks changeweight_btn */

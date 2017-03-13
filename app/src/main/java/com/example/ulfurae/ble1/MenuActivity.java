@@ -33,7 +33,7 @@ import static com.example.ulfurae.ble1.FormulaActivity.*;
 // All other activities extended this class to have the menu
 public class MenuActivity extends AppCompatActivity {
 
-    String loggedInUser = "tester2";
+    String loggedInUser = "tester1";
 
     // / Activity code here
     @Override

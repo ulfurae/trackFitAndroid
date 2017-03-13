@@ -13,7 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends MenuActivity {
 
-    String loggedInUser = "tester2";
+    String loggedInUser = "tester1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
