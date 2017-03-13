@@ -69,6 +69,8 @@ public class AddExerciseActivity extends MenuActivity{
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, exercises);
         spinner.setAdapter(adapter);
 
+        exercisesList.clear();
+
     }
 
     public void addExercise(View view) {

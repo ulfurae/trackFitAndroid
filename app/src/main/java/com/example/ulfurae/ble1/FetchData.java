@@ -71,23 +71,27 @@ public class FetchData {
         return user;
     }
 
-    public static List<UserExercise> parseUserExercise(String jsonString) throws JSONException, ParseException {
+    public static List<UserExercise> parseUserExercise(List<UserExercise> userExercises, JSONArray jsonArray) throws JSONException, ParseException {
         Log.i("Parse","UserExercise");
 
-        List<UserExercise> uExercise = new ArrayList<>();
-        JSONArray jsonResults = new JSONArray(jsonString);
+        for (int i=0; i<jsonArray.length(); i++) {
+            JSONObject oneObject = jsonArray.getJSONObject(i);
+            int repetition = Integer.parseInt(oneObject.getString("unit1"));
+            int weight = Integer.parseInt(oneObject.getString("unit2"));
+            int exerciseID = oneObject.getInt("exerciseID");
+            String date = oneObject.getString("date");
 
-        for (int i=0; i<jsonResults.length(); i++) {
-            JSONObject jsonResult = jsonResults.getJSONObject(i);
-            uExercise.add(new UserExercise(
-                    jsonResult.getLong("userGoalID"),
-                    jsonResult.getLong("userID"),
-                    jsonResult.getLong("exerciseID"),
-                    jsonResult.getInt("unit1"),
-                    jsonResult.getInt("unit2"),
-                    jsonResult.getDate("date")
-            ));
+            UserExercise uExercise = new UserExercise();
+
+            uExercise.setUnit1(repetition);
+            uExercise.setUnit2(weight);
+            uExercise.setExerciseID(exerciseID);
+            uExercise.setDate(date);
+
+            userExercises.add(uExercise);
+
         }
+        return userExercises;
     }
 
     public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray) throws JSONException, ParseException {
