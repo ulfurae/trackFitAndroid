@@ -46,7 +46,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
         android:ems="10"
         android:hint="start"
         android:id="@+id/startDate" />
@@ -54,7 +53,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
         android:ems="10"
         android:hint="end"
         android:id="@+id/endDate" />

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,7 +42,7 @@ import entities.Exercise;
  * Created by heidrunh on 2.3.2017.
  */
 
-public class AddGoalActivity extends MenuActivity implements OnClickListener {
+public class AddGoalActivity extends MenuActivity {
 
     private Spinner spinner;
     private static List<String> exercisesList = new ArrayList<String>();
@@ -104,8 +106,6 @@ public class AddGoalActivity extends MenuActivity implements OnClickListener {
     }
 
     private void setDateTimeField() {
-        fromDateEditText.setOnClickListener(this);
-        toDateEditText.setOnClickListener(this);
 
         Calendar newCalendar = Calendar.getInstance();
         fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -127,15 +127,26 @@ public class AddGoalActivity extends MenuActivity implements OnClickListener {
             }
 
         },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-    }
 
-    @Override
-    public void onClick(View view) {
-        if(view == fromDateEditText) {
-            fromDatePickerDialog.show();
-        } else if(view == toDateEditText) {
-            toDatePickerDialog.show();
-        }
+        fromDateEditText.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent e) {
+                if(e.getAction() == MotionEvent.ACTION_DOWN) {
+                    fromDatePickerDialog.show();
+                }
+                return false;
+            }
+        });
+
+        toDateEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent e) {
+                if(e.getAction() == MotionEvent.ACTION_DOWN) {
+                    toDatePickerDialog.show();
+                }
+                return false;
+            }
+        });
     }
 
     public void addGoal(View view) {
