@@ -115,4 +115,9 @@ public class AddExerciseActivity extends MenuActivity{
             Log.e("FetchData", "Failed to fetch items", ioe);
         }
     }
+
+    public void goToExerciseLog(View view) {
+        Intent intent = new Intent(this, ViewExerciseActivity.class);
+        startActivity(intent);
+    }
 }

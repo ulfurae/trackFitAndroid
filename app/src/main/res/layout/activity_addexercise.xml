@@ -47,6 +47,7 @@
         android:text="Exercise Log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/exerciseLog" />
+        android:id="@+id/exerciseLog"
+        android:onClick="goToExerciseLog"/>
 
 </LinearLayout>

@@ -190,4 +190,9 @@ public class AddGoalActivity extends MenuActivity implements OnClickListener {
             Log.e("FetchData", "Failed to fetch items", ioe);
         }
     }
+
+    public void goToViewGoals(View view) {
+        Intent intent = new Intent(this, ViewGoalActivity.class);
+        startActivity(intent);
+    }
 }
