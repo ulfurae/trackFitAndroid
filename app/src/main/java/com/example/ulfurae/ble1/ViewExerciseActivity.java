@@ -46,7 +46,7 @@ public class ViewExerciseActivity extends MenuActivity {
         try {
             String url = Uri.parse("http://10.0.2.2:8080/exerciseLog?")
                     .buildUpon()
-                    .appendQueryParameter("userName","tester1")
+                    .appendQueryParameter("userName",userName)
                     .build().toString();
             Log.i("Urlið", url);
             String jsonString = FetchData.getUrlString(url);
