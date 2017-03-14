@@ -148,6 +148,13 @@ public class ViewExerciseActivity extends MenuActivity {
             }
         });
 
+        Button delete = (Button) dialogView.findViewById(R.id.buttonDelete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                //Á eftir að útfæra
+            }
+        });
+
 
         TextView exerciseDate = (TextView) dialogView.findViewById(R.id.exerciseEntryDate);
         exerciseDate.setText(userExercise.getDate());
