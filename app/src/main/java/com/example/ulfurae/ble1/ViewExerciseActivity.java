@@ -132,6 +132,10 @@ public class ViewExerciseActivity extends MenuActivity {
         userExercise.clear();
     }
 
+    /**
+     * Function makes a pop-up dialog with more detailed information about a certain exercise entry
+     * @param userExercise contains all information about  a certain exercise entry
+     */
     public void showExerciseEntry(UserExercise userExercise) {
         final AlertDialog alertDialog = new AlertDialog.Builder(ViewExerciseActivity.this).create();
         LayoutInflater inflater = getLayoutInflater();
