@@ -1,10 +1,16 @@
 package com.example.ulfurae.ble1;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -50,7 +56,7 @@ public class ViewExerciseActivity extends MenuActivity {
                     .build().toString();
             Log.i("Urlið", url);
             String jsonString = FetchData.getUrlString(url);
-            if(jsonString.equals("null")){
+            if(!jsonString.equals("null")){
                 Log.i("FetchData","Received JSON: "+jsonString);
                 JSONArray jsonArray = new JSONArray(jsonString);
                 System.out.println(jsonArray);
@@ -76,39 +82,83 @@ public class ViewExerciseActivity extends MenuActivity {
      * Function takes the user's exercise entries and adds them to the view
      * @param userExercise are the exercise entries that belong to the user
      */
-    public void addToTable(List<UserExercise> userExercise){
+    public void addToTable(final List<UserExercise> userExercise){
         TableLayout table = (TableLayout) findViewById(R.id.exerciseTable);
 
         for(int i = 0; i<userExercise.size();i++){
-            UserExercise uExercise = userExercise.get(i);
+            final UserExercise uExercise = userExercise.get(i);
 
             TableRow row= new TableRow(this);
+            row.setClickable(true);
+            row.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    showExerciseEntry(uExercise);
+                }
+            });
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,TableRow.LayoutParams.WRAP_CONTENT );
 
             int leftMargin=10;
-            int topMargin=2;
+            int topMargin=10;
             int rightMargin=250;
-            int bottomMargin=2;
+            int bottomMargin=10;
 
             lp.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
 
             TextView exerciseDate = new TextView(this.getApplicationContext());
             exerciseDate.setLayoutParams(lp);
             exerciseDate.setText(uExercise.getDate());
+
             TextView exercise = new TextView(this.getApplicationContext());
             exercise.setLayoutParams(lp);
             exercise.setText(Integer.toString(uExercise.getExerciseID()));
+
             TextView weight = new TextView(this.getApplicationContext());
             weight.setLayoutParams(lp);
             weight.setText(Integer.toString(uExercise.getUnit2()));
 
+            TextView userExerciseId = new TextView(this.getApplicationContext());
+            userExerciseId.setVisibility(View.INVISIBLE);
+            userExerciseId.setText(Long.toString(uExercise.getId()));
+
+
             row.addView(exerciseDate);
             row.addView(exercise);
             row.addView(weight);
+            row.addView(userExerciseId);
 
             table.addView(row,i);
         }
 
         userExercise.clear();
+    }
+
+    public void showExerciseEntry(UserExercise userExercise) {
+        final AlertDialog alertDialog = new AlertDialog.Builder(ViewExerciseActivity.this).create();
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.from(this).inflate(R.layout.activity_viewexerciseentry, null);
+
+        Button close = (Button) dialogView.findViewById(R.id.buttonClose);
+        close.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+
+        TextView exerciseDate = (TextView) dialogView.findViewById(R.id.exerciseEntryDate);
+        exerciseDate.setText(userExercise.getDate());
+
+        TextView exercise = (TextView) dialogView.findViewById(R.id.exerciseInEntry);
+        exercise.setText(Long.toString(userExercise.getExerciseID()));
+
+        TextView weight = (TextView) dialogView.findViewById(R.id.weight);
+        weight.setText(Integer.toString(userExercise.getUnit2()));
+
+        TextView reps = (TextView) dialogView.findViewById(R.id.repetitions);
+        reps.setText(Integer.toString(userExercise.getUnit1()));
+
+        alertDialog.setView(dialogView);
+
+        alertDialog.show();
     }
 }

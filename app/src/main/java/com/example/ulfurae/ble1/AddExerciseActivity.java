@@ -120,6 +120,7 @@ public class AddExerciseActivity extends MenuActivity{
 
     public void goToExerciseLog(View view) {
         Intent intent = new Intent(this, ViewExerciseActivity.class);
+        intent.putExtra("Username","tester2");
         startActivity(intent);
     }
 }

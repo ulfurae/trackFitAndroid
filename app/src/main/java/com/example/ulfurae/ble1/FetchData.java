@@ -80,6 +80,9 @@ public class FetchData {
             int weight = Integer.parseInt(oneObject.getString("unit2"));
             int exerciseID = oneObject.getInt("exerciseID");
             String date = oneObject.getString("date");
+            Long userExerciseId = oneObject.getLong("id");
+            Long userId = oneObject.getLong("userID");
+            Long userGoalId = oneObject.getLong("userGoalID");
 
             UserExercise uExercise = new UserExercise();
 
@@ -87,6 +90,9 @@ public class FetchData {
             uExercise.setUnit2(weight);
             uExercise.setExerciseID(exerciseID);
             uExercise.setDate(date);
+            uExercise.setId(userExerciseId);
+            uExercise.setUserID(userId);
+            uExercise.setUserGoalID(userGoalId);
 
             userExercises.add(uExercise);
 

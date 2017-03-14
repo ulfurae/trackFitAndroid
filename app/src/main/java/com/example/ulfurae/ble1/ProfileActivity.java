@@ -71,7 +71,6 @@ public class ProfileActivity extends MenuActivity {
         String isUserFound = user.getUsername();
 
         if(isUserFound != "null") {
-            Toast.makeText(getApplicationContext(), "User found", Toast.LENGTH_SHORT).show();
 
             Button changeWeightButton = (Button) findViewById(R.id.changeweight_btn);
             changeWeightButton.setEnabled(true);

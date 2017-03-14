@@ -204,6 +204,7 @@ public class AddGoalActivity extends MenuActivity {
 
     public void goToViewGoals(View view) {
         Intent intent = new Intent(this, ViewGoalActivity.class);
+        intent.putExtra("Username","tester2");
         startActivity(intent);
     }
 }
