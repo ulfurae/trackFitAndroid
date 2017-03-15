@@ -69,6 +69,7 @@ public class AddGoalActivity extends MenuActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        //get the list of exercises from database for the dropdown list
         try {
             String url = Uri.parse("http://10.0.2.2:8080/getExercises")
                     .buildUpon()
@@ -89,6 +90,7 @@ public class AddGoalActivity extends MenuActivity {
         String[] exercises = new String[exercisesList.size()];
         exercises = exercisesList.toArray(exercises);
 
+        //dropdown list of exercises
         spinner = (Spinner)findViewById(R.id.exerciseSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, exercises);
@@ -105,6 +107,7 @@ public class AddGoalActivity extends MenuActivity {
 
     }
 
+    //fancy DatePicker
     private void setDateTimeField() {
 
         Calendar newCalendar = Calendar.getInstance();
@@ -151,6 +154,7 @@ public class AddGoalActivity extends MenuActivity {
 
     public void addGoal(View view) {
 
+        //get input arguments
         EditText repetitionsTxt = (EditText) findViewById(R.id.repetitions);
         String stringRepetitions = repetitionsTxt.getText().toString();
 
@@ -166,6 +170,7 @@ public class AddGoalActivity extends MenuActivity {
         Spinner exerciseTxt = (Spinner) findViewById(R.id.exerciseSpinner);
         String exercise = exerciseTxt.getSelectedItem().toString();
 
+        //get logged in user
         Bundle extras = getIntent().getExtras();
         String userName = extras.getString("Username");
 
@@ -174,6 +179,7 @@ public class AddGoalActivity extends MenuActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        //Construct URL query to send to database
         try {
             String url = Uri.parse("http://10.0.2.2:8080/addGoal?")
                     .buildUpon()
@@ -203,6 +209,8 @@ public class AddGoalActivity extends MenuActivity {
     }
 
     public void goToViewGoals(View view) {
+
+        //logged in mock user
         Intent intent = new Intent(this, ViewGoalActivity.class);
         intent.putExtra("Username","tester2");
         startActivity(intent);
