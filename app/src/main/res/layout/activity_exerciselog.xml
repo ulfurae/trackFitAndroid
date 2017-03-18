@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_exerciselog"
     android:layout_width="match_parent"
@@ -19,92 +19,26 @@
         android:layout_alignParentStart="true"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:textSize="32sp" />
-
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/textView2"
-        android:paddingLeft="6dp"
-        android:paddingTop="6dp"
-        android:layout_marginTop="0dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date: "
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/date"
-            android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exercise: "
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="1"
+    <TableRow>
+        <TextView android:text="Date"
+            android:layout_width="100dp"
             android:layout_column="0"
-            android:layout_marginBottom="5dp" />
+            android:layout_weight="1"/>
+        <TextView android:text="Exercise"
+            android:layout_width="30dp"
+            android:layout_column="1"
+            android:layout_weight="1" />
+        <TextView android:text="Weight"
+            android:layout_width="30dp"
+            android:layout_column="2"
+            android:layout_weight="1" />
+    </TableRow>
+    <TableLayout
+        android:id="@+id/exerciseTable"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="1.0">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/exercise"
-            android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+    </TableLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Type: "
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/type"
-            android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weight: "
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="3"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/weight"
-            android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Reps:"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="4"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/reps"
-            android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
-    </GridLayout>
-
-</RelativeLayout>
+</TableLayout>

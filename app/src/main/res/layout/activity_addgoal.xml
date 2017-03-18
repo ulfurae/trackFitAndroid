@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/goalLayout">
 
     <TextView
         android:text="Choose exercise:"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:id="@+id/exerciseSpinner"
         android:spinnerMode="dropdown" />
 
     <TextView
         android:text="Units:"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:hint="weight"
-        android:id="@+id/editText" />
 
     <EditText
         android:layout_width="match_parent"
@@ -33,36 +26,48 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:hint="reps"
-        android:id="@+id/editText2" />
+        android:id="@+id/repetitions"
+        android:imeOptions="actionDone"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:hint="weight"
+        android:id="@+id/goalWeight"
+        android:imeOptions="actionDone"/>
 
     <TextView
         android:text="Start and End date:"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
         android:ems="10"
-        android:hint="start" />
+        android:hint="start"
+        android:id="@+id/startDate" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
         android:ems="10"
-        android:hint="end" />
+        android:hint="end"
+        android:id="@+id/endDate" />
 
     <Button
-        android:text="Save Exercise"
+        android:text="Save Goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button" />
+        android:id="@+id/saveGoal"
+        android:onClick="addGoal" />
 
     <Button
-        android:text="Exercise Log"
+        android:text="Goal Log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button2" />
+        android:id="@+id/goalLog"
+        android:onClick="goToViewGoals"/>
 </LinearLayout>

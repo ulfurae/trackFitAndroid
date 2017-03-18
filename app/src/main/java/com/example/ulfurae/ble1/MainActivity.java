@@ -32,6 +32,7 @@ public class MainActivity extends MenuActivity {
     public void viewExerciseLog(View view) {
 
         Intent intent = new Intent(this, ViewExerciseActivity.class);
+        intent.putExtra("Username",loggedInUser);
         startActivity(intent);
 
     }

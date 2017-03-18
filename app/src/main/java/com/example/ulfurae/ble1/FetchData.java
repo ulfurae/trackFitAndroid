@@ -14,12 +14,14 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import entities.Exercise;
 import entities.User;
+import entities.UserExercise;
 
 /**
  * Created by heidrunh on 2.3.2017.
@@ -67,6 +69,35 @@ public class FetchData {
         user.setWeight(weight);
 
         return user;
+    }
+
+    public static List<UserExercise> parseUserExercise(List<UserExercise> userExercises, JSONArray jsonArray) throws JSONException, ParseException {
+        Log.i("Parse","UserExercise");
+
+        for (int i=0; i<jsonArray.length(); i++) {
+            JSONObject oneObject = jsonArray.getJSONObject(i);
+            int repetition = Integer.parseInt(oneObject.getString("unit1"));
+            int weight = Integer.parseInt(oneObject.getString("unit2"));
+            int exerciseID = oneObject.getInt("exerciseID");
+            String date = oneObject.getString("date");
+            Long userExerciseId = oneObject.getLong("id");
+            Long userId = oneObject.getLong("userID");
+            Long userGoalId = oneObject.getLong("userGoalID");
+
+            UserExercise uExercise = new UserExercise();
+
+            uExercise.setUnit1(repetition);
+            uExercise.setUnit2(weight);
+            uExercise.setExerciseID(exerciseID);
+            uExercise.setDate(date);
+            uExercise.setId(userExerciseId);
+            uExercise.setUserID(userId);
+            uExercise.setUserGoalID(userGoalId);
+
+            userExercises.add(uExercise);
+
+        }
+        return userExercises;
     }
 
     public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray) throws JSONException, ParseException {

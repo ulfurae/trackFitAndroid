@@ -19,6 +19,7 @@ import org.json.JSONStringer;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import entities.Exercise;
@@ -37,12 +38,12 @@ public class AddExerciseActivity extends MenuActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addexercise);
 
-
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
+        //get the list of exercises from database for the dropdown list
         try {
             String url = Uri.parse("http://10.0.2.2:8080/getExercises")
                     .buildUpon()
@@ -63,15 +64,18 @@ public class AddExerciseActivity extends MenuActivity{
         String[] exercises = new String[exercisesList.size()];
         exercises = exercisesList.toArray(exercises);
 
-
+        //dropdown list of exercises
         spinner = (Spinner)findViewById(R.id.exerciseSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, exercises);
         spinner.setAdapter(adapter);
+
+        exercisesList.clear();
 
     }
 
     public void addExercise(View view) {
 
+        //get input arguments
         EditText repetitionsTxt = (EditText) findViewById(R.id.repetitions);
         String stringRepetitions = repetitionsTxt.getText().toString();
 
@@ -81,6 +85,7 @@ public class AddExerciseActivity extends MenuActivity{
         Spinner exerciseTxt = (Spinner) findViewById(R.id.exerciseSpinner);
         String exercise = exerciseTxt.getSelectedItem().toString();
 
+        //get logged in user
         Bundle extras = getIntent().getExtras();
         String userName = extras.getString("Username");
 
@@ -89,6 +94,7 @@ public class AddExerciseActivity extends MenuActivity{
             StrictMode.setThreadPolicy(policy);
         }
 
+        //construct URL query to send to database
         try {
             String url = Uri.parse("http://10.0.2.2:8080/addExercise?")
                     .buildUpon()
@@ -111,5 +117,13 @@ public class AddExerciseActivity extends MenuActivity{
         } catch(IOException ioe) {
             Log.e("FetchData", "Failed to fetch items", ioe);
         }
+    }
+
+    public void goToExerciseLog(View view) {
+
+        //logged in mock user
+        Intent intent = new Intent(this, ViewExerciseActivity.class);
+        intent.putExtra("Username","tester2");
+        startActivity(intent);
     }
 }

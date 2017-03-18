@@ -11,15 +11,15 @@ public class UserExercise {
 
     private Long userGoalID;
     private Long userID;
-    private Long exerciseID;
+    private int exerciseID;
 
     private int unit1;
     private int unit2;
-    private Date date;
+    private String date;
 
     public UserExercise() { }
 
-    public UserExercise(Long userGoalID, Long userID, Long exerciseID, int unit1, int unit2, Date date) {
+    public UserExercise(Long userGoalID, Long userID, int exerciseID, int unit1, int unit2, String date) {
         this.userGoalID = userGoalID;
         this.userID = userID;
         this.exerciseID = exerciseID;
@@ -52,11 +52,11 @@ public class UserExercise {
         this.userID = userID;
     }
 
-    public Long getExerciseID() {
+    public int getExerciseID() {
         return exerciseID;
     }
 
-    public void setExerciseID(Long exerciseID) {
+    public void setExerciseID(int exerciseID) {
         this.exerciseID = exerciseID;
     }
 
@@ -74,12 +74,13 @@ public class UserExercise {
         this.unit2 = unit2;
     }
 
-    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    /*private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     public String getDate() {
         return format.format(date);
-    }
+    }*/
+    public String getDate() { return date; }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }
