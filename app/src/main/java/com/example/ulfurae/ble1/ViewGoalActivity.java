@@ -12,4 +12,6 @@ public class ViewGoalActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goallog);
     }
+
+    //Á eftir að útfæra
 }

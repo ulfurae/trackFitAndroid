@@ -1,10 +1,14 @@
 package com.example.ulfurae.ble1;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,7 +24,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +91,7 @@ public class ViewExerciseActivity extends MenuActivity {
      * Function takes the user's exercise entries and adds them to the view
      * @param userExercise are the exercise entries that belong to the user
      */
-    public void addToTable(final List<UserExercise> userExercise){
+    public void addToTable(final List<UserExercise> userExercise) {
         TableLayout table = (TableLayout) findViewById(R.id.exerciseTable);
 
         for(int i = 0; i<userExercise.size();i++){
@@ -117,8 +125,10 @@ public class ViewExerciseActivity extends MenuActivity {
 
             TextView weight = new TextView(this.getApplicationContext());
             weight.setLayoutParams(lp);
-            weight.setText(Integer.toString(uExercise.getUnit2()));
-            weight.setTextColor(0xFF000000);
+            SpannableString spannableWeight = new SpannableString(Integer.toString(uExercise.getUnit2()));
+            spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
+            weight.setText(spannableWeight);
+            weight.setTextColor(Color.BLUE);
 
             TextView userExerciseId = new TextView(this.getApplicationContext());
             userExerciseId.setVisibility(View.INVISIBLE);
@@ -176,4 +186,5 @@ public class ViewExerciseActivity extends MenuActivity {
 
         alertDialog.show();
     }
+
 }
