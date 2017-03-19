@@ -108,19 +108,22 @@ public class ViewExerciseActivity extends MenuActivity {
             TextView exerciseDate = new TextView(this.getApplicationContext());
             exerciseDate.setLayoutParams(lp);
             exerciseDate.setText(uExercise.getDate());
+            exerciseDate.setTextColor(0xFF000000);
 
             TextView exercise = new TextView(this.getApplicationContext());
             exercise.setLayoutParams(lp);
             exercise.setText(Integer.toString(uExercise.getExerciseID()));
+            exercise.setTextColor(0xFF000000);
 
             TextView weight = new TextView(this.getApplicationContext());
             weight.setLayoutParams(lp);
             weight.setText(Integer.toString(uExercise.getUnit2()));
+            weight.setTextColor(0xFF000000);
 
             TextView userExerciseId = new TextView(this.getApplicationContext());
             userExerciseId.setVisibility(View.INVISIBLE);
             userExerciseId.setText(Long.toString(uExercise.getId()));
-
+            userExerciseId.setTextColor(0xFF000000);
 
             row.addView(exerciseDate);
             row.addView(exercise);
