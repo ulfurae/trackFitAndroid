@@ -73,6 +73,7 @@ public class AddExerciseActivity extends MenuActivity{
 
     }
 
+    //function for the Save Exercise button
     public void addExercise(View view) {
 
         //get input arguments
@@ -119,6 +120,7 @@ public class AddExerciseActivity extends MenuActivity{
         }
     }
 
+    //function for Exercise Log button to go to Exercise Log from Add Exercise view
     public void goToExerciseLog(View view) {
 
         //logged in mock user

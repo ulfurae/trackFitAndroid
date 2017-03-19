@@ -49,6 +49,7 @@ public class ViewExerciseActivity extends MenuActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        //construct URL query to send to database
         try {
             String url = Uri.parse("http://10.0.2.2:8080/exerciseLog?")
                     .buildUpon()

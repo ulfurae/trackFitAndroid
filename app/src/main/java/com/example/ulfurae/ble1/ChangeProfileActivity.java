@@ -43,6 +43,7 @@ public class ChangeProfileActivity extends MenuActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        //construct URL query to send to database
         User user = new User();
         try {
             String url = Uri.parse("http://10.0.2.2:8080/changeProfile?")

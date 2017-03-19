@@ -53,6 +53,7 @@ public class FetchData {
         return new String(getUrlBytes(urlSpec));
     }
 
+    //function to pass json strings fetched from database to android entity User
     public static User parseUser(User user, JSONObject jsonBody) throws JSONException, ParseException {
         Log.i("Parse","User");
 
@@ -71,6 +72,7 @@ public class FetchData {
         return user;
     }
 
+    //function to pass json strings fetched from database to android entity UserExercise
     public static List<UserExercise> parseUserExercise(List<UserExercise> userExercises, JSONArray jsonArray) throws JSONException, ParseException {
         Log.i("Parse","UserExercise");
 
@@ -100,6 +102,7 @@ public class FetchData {
         return userExercises;
     }
 
+    //function to pass json strings fetched from database to android entity Exercise (for dropdown list)
     public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray) throws JSONException, ParseException {
         Log.i("Parse","Exercise");
         for (int i=0; i < jsonArray.length(); i++) {
