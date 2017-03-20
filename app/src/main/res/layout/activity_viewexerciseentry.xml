@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="2">
+
+    <TextView
+        android:text="Exercise entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textSize="32sp" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="146dp"
+        android:layout_below="@+id/textView2"
+        android:paddingLeft="6dp"
+        android:paddingTop="6dp"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: "
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/exerciseEntryDate"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercise: "
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/exerciseInEntry"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Repetitions: "
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/repetitions"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight: "
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/weight"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+
+    </GridLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="#c0c0c0"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="Close"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonClose" />
+
+        <Button
+            android:text="Delete"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonDelete" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -29,13 +29,13 @@ import static com.example.ulfurae.ble1.FormulaActivity.*;
  * Created by ulfurae on 18.2.2017.
  */
 
-// A class that adds a menu in all activities
+// A class that adds a menu (in top right corner) in all activities
 // All other activities extended this class to have the menu
 public class MenuActivity extends AppCompatActivity {
 
     String loggedInUser = "tester2";
 
-    // / Activity code here
+    //
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

@@ -152,6 +152,7 @@ public class AddGoalActivity extends MenuActivity {
         });
     }
 
+    //function for the Save Goal button
     public void addGoal(View view) {
 
         //get input arguments
@@ -208,6 +209,7 @@ public class AddGoalActivity extends MenuActivity {
         }
     }
 
+    //function for Goal Log button to go to Goal Log from Add Goal view
     public void goToViewGoals(View view) {
 
         //logged in mock user

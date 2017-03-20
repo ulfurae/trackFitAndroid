@@ -8,6 +8,7 @@ import entities.BMI;
 
 public class FormulaActivity {
 
+    //function to calculate BMI
     public static BMI BMICalculate(int height, int weight) {
         BMI bmi = new BMI();
         if(height != 0 && weight != 0) {
@@ -37,6 +38,7 @@ public class FormulaActivity {
         }
     }
 
+    //placeholder, for calculating goal progress, still in progress
     public boolean ProgressCal(int[] unit, int[] unitGoal) {
         return true;
     }

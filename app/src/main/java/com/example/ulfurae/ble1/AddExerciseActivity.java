@@ -1,5 +1,6 @@
 package com.example.ulfurae.ble1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -53,6 +56,7 @@ public class AddExerciseActivity extends MenuActivity{
             Log.i("FetchData","Received JSON: "+jsonString);
             JSONArray jsonArray = new JSONArray(jsonString);
             exercisesList = FetchData.parseExercise(exercisesList, jsonArray);
+
         } catch(IOException ioe) {
             Log.e("FetchData", "Failed to fetch items", ioe);
         } catch (JSONException je) {
@@ -73,6 +77,7 @@ public class AddExerciseActivity extends MenuActivity{
 
     }
 
+    //function for the Save Exercise button
     public void addExercise(View view) {
 
         //get input arguments
@@ -119,6 +124,7 @@ public class AddExerciseActivity extends MenuActivity{
         }
     }
 
+    //function for Exercise Log button to go to Exercise Log from Add Exercise view
     public void goToExerciseLog(View view) {
 
         //logged in mock user
