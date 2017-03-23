@@ -23,13 +23,14 @@ public class AddExerciseActivity extends MenuActivity{
 
     private Spinner spinner;
     private static List<String> exercisesList = new ArrayList<String>();
-    private Bundle extras = getIntent().getExtras();
+    private Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addexercise);
 
+        extras = getIntent().getExtras();
         //dropdown list of exercises
         spinner = (Spinner)findViewById(R.id.exerciseSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, extras.getStringArray("exercises"));

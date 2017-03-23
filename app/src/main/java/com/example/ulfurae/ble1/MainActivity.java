@@ -75,6 +75,7 @@ public class MainActivity extends MenuActivity {
 
         Intent intent = new Intent(this, ViewExerciseActivity.class);
         intent.putExtra("Username",loggedInUser);
+        intent.putExtra("exercises",exercises);
         startActivity(intent);
 
     }
