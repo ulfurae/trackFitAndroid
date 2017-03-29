@@ -45,13 +45,16 @@ public class ProfileActivity extends MenuActivity {
                     .buildUpon()
                     .appendQueryParameter("name",userName)
                     .build().toString();
-            Log.i("Urlið", url);
+
             String jsonString = FetchData.getUrlString(url);
-            Log.i("FetchData","Received JSON: "+jsonString);
             JSONObject jsonBody = new JSONObject(jsonString);
-            Log.i("FetchData", "Received JSON Object: "+jsonBody);
+
             String name = jsonBody.getString("fullName");
             user = FetchData.parseUser(user, jsonBody);
+
+            Log.i("Url", url);
+            Log.i("FetchData","Received JSON: " + jsonString);
+            Log.i("FetchData", "Received JSON Object: " + jsonBody);
         } catch(IOException ioe) {
             Log.e("FetchData", "Failed to fetch items", ioe);
         } catch (JSONException je) {
@@ -61,12 +64,6 @@ public class ProfileActivity extends MenuActivity {
         }
 
         setContentView(R.layout.activity_profile);
-
-
-
-        /*User testUser = new User("testUser", "ble", "Tester Testersson", new Date(), 180, 85);
-        System.out.println("dewdw");
-        System.out.println(testUser);*/
 
         String isUserFound = user.getUsername();
 

@@ -11,13 +11,14 @@
     android:background="?android:attr/windowBackground">
 
     <TextView
-        android:text="Profile"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Profile"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textColor="?attr/editTextColor"
         android:textSize="32sp" />
 
     <GridLayout
@@ -31,105 +32,124 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:text="Name: "
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_marginBottom="5dp" />
+            android:textColor="@color/darkGray" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="?android:attr/editTextColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"
+            android:layout_row="1"
             android:text="Birthday: "
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
+            android:textColor="@color/darkGray" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="?android:attr/editTextColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"
+            android:layout_row="2"
             android:text="Height (cm): "
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
+            android:textColor="@color/darkGray" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="?android:attr/editTextColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"
+            android:layout_row="3"
             android:text="Weight (kg): "
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="3"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
+            android:textColor="@color/darkGray" />
+
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="?android:attr/editTextColor" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/weight"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"
+            android:layout_row="4"
+            android:text="BMI:"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:textColor="@color/darkGray" />
+
+        <TextView
+            android:id="@+id/bmi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="?android:attr/editTextColor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="0"
+            android:layout_marginBottom="5dp"
+            android:layout_row="5"
+            android:text="You are:"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
+            android:textColor="@color/darkGray" />
+
+        <TextView
+            android:id="@+id/bmiIdeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="?android:attr/editTextColor" />
 
         <Button
             android:id="@+id/changeweight_btn"
-            style="@style/Widget.AppCompat.Button"
-            android:textAppearance="@style/TextAppearance.AppCompat.Button"
-            android:text="Change Weight"
-            android:fontFamily="sans-serif"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_column="1"
+            android:layout_marginLeft="50dp"
+            android:layout_row="3"
+            android:backgroundTint="@android:color/holo_orange_dark"
             android:onClick="viewChangeWeight"
-            android:textAllCaps="false"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BMI:"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="4"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bmi"
-            android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You are:"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.WindowTitle"
-            android:layout_row="5"
-            android:layout_column="0"
-            android:layout_marginBottom="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bmiIdeal"
-            android:text="..."
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium" />
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Change wheight"
+            android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
+            android:textColor="@android:color/black" />
     </GridLayout>
 
 </RelativeLayout>

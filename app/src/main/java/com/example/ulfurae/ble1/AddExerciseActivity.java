@@ -51,12 +51,14 @@ public class AddExerciseActivity extends MenuActivity{
             String url = Uri.parse("http://10.0.2.2:8080/getExercises")
                     .buildUpon()
                     .build().toString();
-            Log.i("Urlið", url);
+
             String jsonString = FetchData.getUrlString(url);
-            Log.i("FetchData","Received JSON: "+jsonString);
+
             JSONArray jsonArray = new JSONArray(jsonString);
             exercisesList = FetchData.parseExercise(exercisesList, jsonArray);
 
+            Log.i("Urlið", url);
+            Log.i("FetchData","Received JSON: "+jsonString);
         } catch(IOException ioe) {
             Log.e("FetchData", "Failed to fetch items", ioe);
         } catch (JSONException je) {
@@ -112,11 +114,11 @@ public class AddExerciseActivity extends MenuActivity{
             Log.i("Urlið", url);
             String jsonString = FetchData.getUrlString(url);
             if(jsonString.equals("true")){
-                Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Exercise saved", Toast.LENGTH_SHORT).show();
                 repetitionsTxt.setText("");
                 weightLiftedTxt.setText("");
             } else {
-                Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Failed to save exercise", Toast.LENGTH_SHORT).show();
             }
 
         } catch(IOException ioe) {
