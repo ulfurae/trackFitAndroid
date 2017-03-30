@@ -93,7 +93,8 @@ public class AddExerciseActivity extends MenuActivity{
 
         //logged in mock user
         Intent intent = new Intent(this, ViewExerciseActivity.class);
-        intent.putExtra("Username","tester2");
+        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("exercises",extras.getStringArray("exercises"));
         startActivity(intent);
     }
 }
