@@ -28,6 +28,7 @@ public class MainActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        exercisesList.clear();
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -96,6 +97,7 @@ public class MainActivity extends MenuActivity {
 
         Intent intent = new Intent(this, AddGoalActivity.class);
         intent.putExtra("Username",loggedInUser);
+        intent.putExtra("exercises",exercises);
         startActivity(intent);
     }
 

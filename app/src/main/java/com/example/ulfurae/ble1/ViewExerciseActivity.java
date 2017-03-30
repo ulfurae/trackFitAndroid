@@ -39,11 +39,10 @@ public class ViewExerciseActivity extends MenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_exerciselog);
-
         extras = getIntent().getExtras();
-
         String userName = extras.getString("Username");
+
+        setContentView(R.layout.activity_exerciselog);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -103,7 +102,7 @@ public class ViewExerciseActivity extends MenuActivity {
 
             int leftMargin=10;
             int topMargin=10;
-            int rightMargin=250;
+            int rightMargin=100;
             int bottomMargin=10;
 
             lp.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
@@ -115,7 +114,7 @@ public class ViewExerciseActivity extends MenuActivity {
 
             TextView exercise = new TextView(this.getApplicationContext());
             exercise.setLayoutParams(lp);
-            exercise.setText(Integer.toString(uExercise.getExerciseID()));
+            changeExerciseIDToName(exercise, uExercise);
             exercise.setTextColor(0xFF000000);
 
             TextView weight = new TextView(this.getApplicationContext());
@@ -124,13 +123,6 @@ public class ViewExerciseActivity extends MenuActivity {
             spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
             weight.setText(spannableWeight);
             weight.setTextColor(Color.BLUE);
-
-            for (int u=0;u < exercise.length();u++) {
-                if (u+1 == uExercise.getExerciseID()) {
-                    exercise.setText(exercises[u]);
-                    break;
-                }
-            }
 
             exercise.equals(uExercise.getExerciseID());
             TextView userExerciseId = new TextView(this.getApplicationContext());
@@ -177,7 +169,7 @@ public class ViewExerciseActivity extends MenuActivity {
         exerciseDate.setText(userExercise.getDate());
 
         TextView exercise = (TextView) dialogView.findViewById(R.id.exerciseInEntry);
-        exercise.setText(Long.toString(userExercise.getExerciseID()));
+        changeExerciseIDToName(exercise, userExercise);
 
         TextView weight = (TextView) dialogView.findViewById(R.id.weight);
         weight.setText(Integer.toString(userExercise.getUnit2()));
@@ -188,6 +180,16 @@ public class ViewExerciseActivity extends MenuActivity {
         alertDialog.setView(dialogView);
 
         alertDialog.show();
+    }
+
+    public void changeExerciseIDToName(TextView view, UserExercise uExercise) {
+        String[] exercises = extras.getStringArray("exercises");
+
+        for (int j=1;j < exercises.length ;j++) {
+            if (j == uExercise.getExerciseID()) {
+                view.setText(exercises[j]);
+            }
+        }
     }
 
 }

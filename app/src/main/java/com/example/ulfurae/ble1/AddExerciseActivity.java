@@ -26,55 +26,18 @@ import java.util.List;
 public class AddExerciseActivity extends MenuActivity{
 
     private Spinner spinner;
-    private static List<String> exercisesList = new ArrayList<String>();
     private Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addexercise);
-
-
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
-        //get the list of exercises from database for the dropdown list
-        try {
-            String url = Uri.parse("http://10.0.2.2:8080/getExercises")
-                    .buildUpon()
-                    .build().toString();
-
-            String jsonString = FetchData.getUrlString(url);
-
-            JSONArray jsonArray = new JSONArray(jsonString);
-            exercisesList = FetchData.parseExercise(exercisesList, jsonArray);
-
-            Log.i("Urlið", url);
-            Log.i("FetchData","Received JSON: "+jsonString);
-        } catch(IOException ioe) {
-            Log.e("FetchData", "Failed to fetch items", ioe);
-        } catch (JSONException je) {
-            Log.e("FetchData","Failed to parse JSON", je);
-        } catch(ParseException pe) {
-            Log.e("FetchData", "Failed to parse date", pe);
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-
-        String[] exercises = new String[exercisesList.size()];
-        exercises = exercisesList.toArray(exercises);
-
-
         extras = getIntent().getExtras();
 
         //dropdown list of exercises
         spinner = (Spinner)findViewById(R.id.exerciseSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, extras.getStringArray("exercises"));
         spinner.setAdapter(adapter);
-
-        exercisesList.clear();
 
     }
 
