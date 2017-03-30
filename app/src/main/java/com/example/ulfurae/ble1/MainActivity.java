@@ -7,6 +7,9 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 
+import com.example.ulfurae.ble1.handlers.HTTPHandler;
+import com.example.ulfurae.ble1.mappers.JsonMapper;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -39,16 +42,16 @@ public class MainActivity extends MenuActivity {
         try {
             String url = Uri.parse("http://10.0.2.2:8080/getExercises").buildUpon() .build().toString();
 
-            String jsonString = FetchData.getUrlString(url);
+            String jsonString = HTTPHandler.requestUrl(url);
             JSONArray jsonArray = new JSONArray(jsonString);
-            exercisesList = FetchData.parseExercise(exercisesList, jsonArray);
+            exercisesList = JsonMapper.parseExercise(exercisesList, jsonArray);
 
             Log.i("Urlið", url);
-            Log.i("FetchData","Received JSON: " + jsonString);
+            Log.i("HTTPHandler","Received JSON: " + jsonString);
         }
-        catch (IOException ioe)   { Log.e("FetchData", "Failed to fetch items", ioe); }
-        catch (JSONException je)  { Log.e("FetchData","Failed to parse JSON", je); }
-        catch (ParseException pe) { Log.e("FetchData", "Failed to parse date", pe); }
+        catch (IOException ioe)   { Log.e("HTTPHandler", "Failed to fetch items", ioe); }
+        catch (JSONException je)  { Log.e("HTTPHandler","Failed to parse JSON", je); }
+        catch (ParseException pe) { Log.e("HTTPHandler", "Failed to parse date", pe); }
 
         exercises = new String[exercisesList.size()];
         exercises = exercisesList.toArray(exercises);

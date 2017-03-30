@@ -7,16 +7,13 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
-import java.text.ParseException;
 
-import entities.User;
+import com.example.ulfurae.ble1.entities.User;
 
 /**
  * Created by heidrunh on 4.3.2017.
@@ -52,7 +49,7 @@ public class ChangeProfileActivity extends MenuActivity {
                     .appendQueryParameter("userName",userName)
                     .build().toString();
             Log.i("Urlið", url);
-            String jsonString = FetchData.getUrlString(url);
+            String jsonString = HTTPHandler.requestUrl(url);
 
             if(jsonString.equals("true")){
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
@@ -63,7 +60,7 @@ public class ChangeProfileActivity extends MenuActivity {
                 Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_SHORT).show();
             }
         } catch(IOException ioe) {
-            Log.e("FetchData", "Failed to fetch items", ioe);
+            Log.e("HTTPHandler", "Failed to fetch items", ioe);
         }
 
     }

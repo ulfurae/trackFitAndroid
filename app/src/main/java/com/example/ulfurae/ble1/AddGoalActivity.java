@@ -1,7 +1,6 @@
 package com.example.ulfurae.ble1;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,32 +9,21 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONStringer;
+import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import entities.Exercise;
 
 
 /**
@@ -174,7 +162,7 @@ public class AddGoalActivity extends MenuActivity {
                     .appendQueryParameter("status", "Not completed")
                     .build().toString();
             Log.i("Urlið",url);
-            String jsonString = FetchData.getUrlString(url);
+            String jsonString = HTTPHandler.requestUrl(url);
             if(jsonString.equals("true")){
                 Toast.makeText(getApplicationContext(), "Goal saved", Toast.LENGTH_SHORT).show();
                 repetitionsTxt.setText("");
@@ -186,7 +174,7 @@ public class AddGoalActivity extends MenuActivity {
             }
 
         } catch(IOException ioe) {
-            Log.e("FetchData", "Failed to fetch items", ioe);
+            Log.e("HTTPHandler", "Failed to fetch items", ioe);
         }
     }
 

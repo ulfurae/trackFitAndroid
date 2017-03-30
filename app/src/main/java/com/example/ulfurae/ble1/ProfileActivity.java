@@ -10,14 +10,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ulfurae.ble1.handlers.HTTPHandler;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.ParseException;
 
-import entities.BMI;
-import entities.User;
+import com.example.ulfurae.ble1.entities.BMI;
+import com.example.ulfurae.ble1.entities.User;
+import com.example.ulfurae.ble1.mappers.FormulaMapper;
+import com.example.ulfurae.ble1.mappers.JsonMapper;
 
 /**
  * Created by heidrunh on 26.2.2017.
@@ -45,22 +49,19 @@ public class ProfileActivity extends MenuActivity {
                     .appendQueryParameter("name",userName)
                     .build().toString();
 
-            String jsonString = FetchData.getUrlString(url);
+            String jsonString = HTTPHandler.requestUrl(url);
             JSONObject jsonBody = new JSONObject(jsonString);
 
             String name = jsonBody.getString("fullName");
-            user = FetchData.parseUser(user, jsonBody);
+            user = JsonMapper.parseUser(user, jsonBody);
 
             Log.i("Url", url);
-            Log.i("FetchData","Received JSON: " + jsonString);
-            Log.i("FetchData", "Received JSON Object: " + jsonBody);
-        } catch(IOException ioe) {
-            Log.e("FetchData", "Failed to fetch items", ioe);
-        } catch (JSONException je) {
-            Log.e("FetchData","Failed to parse JSON", je);
-        } catch(ParseException pe) {
-            Log.e("FetchData", "Failed to parse date", pe);
+            Log.i("HTTPHandler","Received JSON: " + jsonString);
+            Log.i("HTTPHandler", "Received JSON Object: " + jsonBody);
         }
+        catch(IOException ioe)   { Log.e("HTTPHandler", "Failed to fetch items", ioe); }
+        catch(JSONException je)  {  Log.e("HTTPHandler","Failed to parse JSON", je); }
+        catch(ParseException pe) { Log.e("HTTPHandler", "Failed to parse date", pe); }
 
         setContentView(R.layout.activity_profile);
 
@@ -71,7 +72,7 @@ public class ProfileActivity extends MenuActivity {
             Button changeWeightButton = (Button) findViewById(R.id.changeweight_btn);
             changeWeightButton.setEnabled(true);
 
-            BMI bmi = FormulaActivity.BMICalculate(user.getHeight(), user.getWeight());
+            BMI bmi = FormulaMapper.BMICalculate(user.getHeight(), user.getWeight());
 
             TextView nameTxt = (TextView) findViewById(R.id.name);
             nameTxt.setText(user.getFullName());

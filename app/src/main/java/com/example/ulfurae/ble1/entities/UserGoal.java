@@ -1,4 +1,4 @@
-package entities;
+package com.example.ulfurae.ble1.entities;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package entities;
+package com.example.ulfurae.ble1.entities;
 
 // A class that calculates the BMI based on height and weight of a user
 public class BMI {

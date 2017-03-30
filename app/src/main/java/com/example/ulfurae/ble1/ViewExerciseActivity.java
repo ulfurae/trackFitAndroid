@@ -5,8 +5,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +14,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ulfurae.ble1.handlers.HTTPHandler;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -24,7 +24,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.UserExercise;
+import com.example.ulfurae.ble1.entities.UserExercise;
+import com.example.ulfurae.ble1.mappers.JsonMapper;
 
 /**
  * Created by heidrunh on 2.3.2017.
@@ -56,12 +57,12 @@ public class ViewExerciseActivity extends MenuActivity {
                     .appendQueryParameter("userName",userName)
                     .build().toString();
             Log.i("Urlið", url);
-            String jsonString = FetchData.getUrlString(url);
+            String jsonString = HTTPHandler.requestUrl(url);
             if(!jsonString.equals("null")){
-                Log.i("FetchData","Received JSON: "+jsonString);
+                Log.i("HTTPHandler","Received JSON: "+jsonString);
                 JSONArray jsonArray = new JSONArray(jsonString);
                 System.out.println(jsonArray);
-                userExercise = FetchData.parseUserExercise(userExercise, jsonArray);
+                userExercise = JsonMapper.parseUserExercise(userExercise, jsonArray);
 
                 //Add exercise entries to the view
                 addToTable(userExercise);
@@ -71,11 +72,11 @@ public class ViewExerciseActivity extends MenuActivity {
             }
 
         } catch(IOException ioe) {
-            Log.e("FetchData", "Failed to fetch items", ioe);
+            Log.e("HTTPHandler", "Failed to fetch items", ioe);
         } catch (JSONException je) {
-            Log.e("FetchData","Failed to parse JSON", je);
+            Log.e("HTTPHandler","Failed to parse JSON", je);
         } catch(ParseException pe) {
-            Log.e("FetchData", "Failed to parse date", pe);
+            Log.e("HTTPHandler", "Failed to parse date", pe);
         }
     }
 

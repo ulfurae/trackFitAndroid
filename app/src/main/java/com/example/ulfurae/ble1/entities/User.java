@@ -1,6 +1,4 @@
-package entities;
-
-import java.util.Date;
+package com.example.ulfurae.ble1.entities;
 
 public class User {
 

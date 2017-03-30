@@ -1,29 +1,11 @@
 package com.example.ulfurae.ble1;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Date;
-
-import entities.User;
-import entities.BMI;
-
-
-import static com.example.ulfurae.ble1.FetchData.*;
-import static com.example.ulfurae.ble1.FormulaActivity.*;
 
 /**
  * Created by ulfurae on 18.2.2017.

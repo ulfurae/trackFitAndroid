@@ -1,7 +1,4 @@
-package entities;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package com.example.ulfurae.ble1.entities;
 
 public class UserExercise {
 
