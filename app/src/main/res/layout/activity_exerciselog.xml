@@ -11,32 +11,60 @@
     android:background="?android:attr/windowBackground">
 
     <TextView
-        android:text="Exercise Log"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="8px"
+        android:text="Exercise Log"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textColor="?attr/editTextColor"
         android:textSize="32sp" />
-    <TableRow>
-        <TextView android:text="Date"
-            android:layout_width="100dp"
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_margin="1dp"
+        android:background="#d94404"
+        android:paddingBottom="8px"
+        android:paddingLeft="4px"
+        android:paddingTop="4px">
+
+        <TextView
+            android:layout_width="190px"
             android:layout_column="0"
-            android:layout_weight="1"/>
-        <TextView android:text="Exercise"
-            android:layout_width="30dp"
+            android:layout_weight="1"
+            android:text="Date"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="190px"
             android:layout_column="1"
-            android:layout_weight="1" />
-        <TextView android:text="Weight"
-            android:layout_width="30dp"
+            android:layout_weight="1"
+            android:text="Exercise"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="14px"
+            android:layout_column="3"
+            android:layout_weight="1"
+            android:text="Reps"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="66px"
             android:layout_column="2"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="Weight"
+            android:textColor="@android:color/white" />
+
     </TableRow>
+
     <TableLayout
         android:id="@+id/exerciseTable"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:weightSum="1.0">
 
     </TableLayout>

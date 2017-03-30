@@ -92,6 +92,8 @@ public class ViewExerciseActivity extends MenuActivity {
             final UserExercise uExercise = userExercise.get(i);
 
             TableRow row= new TableRow(this);
+            if(i%2 != 0)row.setBackgroundColor(Color.LTGRAY);
+            row.setMinimumHeight(120);
             row.setClickable(true);
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
@@ -119,10 +121,17 @@ public class ViewExerciseActivity extends MenuActivity {
 
             TextView weight = new TextView(this.getApplicationContext());
             weight.setLayoutParams(lp);
-            SpannableString spannableWeight = new SpannableString(Integer.toString(uExercise.getUnit2()));
-            spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
-            weight.setText(spannableWeight);
-            weight.setTextColor(Color.BLUE);
+            //SpannableString spannableWeight = new SpannableString(Integer.toString(uExercise.getUnit2()));
+            //spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
+            weight.setText(Integer.toString(uExercise.getUnit2()));
+            weight.setTextColor(Color.DKGRAY);
+
+            TextView reps = new TextView(this.getApplicationContext());
+            reps.setLayoutParams(lp);
+            //SpannableString spannableWeight = new SpannableString(Integer.toString(uExercise.getUnit2()));
+            //spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
+            reps.setText(Integer.toString(uExercise.getUnit1()));
+            reps.setTextColor(Color.DKGRAY);
 
             exercise.equals(uExercise.getExerciseID());
             TextView userExerciseId = new TextView(this.getApplicationContext());
@@ -132,6 +141,7 @@ public class ViewExerciseActivity extends MenuActivity {
 
             row.addView(exerciseDate);
             row.addView(exercise);
+            row.addView(reps);
             row.addView(weight);
             row.addView(userExerciseId);
 
@@ -142,8 +152,9 @@ public class ViewExerciseActivity extends MenuActivity {
     }
 
     /**
-     * Function makes a pop-up dialog with more detailed information about a certain exercise entry
-     * @param userExercise contains all information about  a certain exercise entry
+     * Function that makes a pop-up dialog window with more detailed information about
+     * exercise entries that are clicked
+     * @param userExercise contains all information about  each exercise entry
      */
     public void showExerciseEntry(UserExercise userExercise) {
         final AlertDialog alertDialog = new AlertDialog.Builder(ViewExerciseActivity.this).create();

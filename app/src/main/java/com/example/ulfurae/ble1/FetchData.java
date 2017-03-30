@@ -28,35 +28,46 @@ import entities.UserExercise;
  */
 
 public class FetchData {
+
     private static final String TAG = "FetchData";
 
     public static byte[] getUrlBytes(String urlSpec) throws IOException {
+
         URL url = new URL(urlSpec);
+
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             InputStream in = conn.getInputStream();
+
             if(conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new IOException(conn.getResponseMessage() + ": with " + urlSpec);
             }
+
             int bytesRead = 0;
             byte[] buffer = new byte[1024];
+
             while((bytesRead = in.read(buffer)) > 0) {
                 out.write(buffer, 0, bytesRead);
             }
             out.close();
+
             return out.toByteArray();
-        }finally { conn.disconnect(); }
+        }
+        finally { conn.disconnect(); }
     }
+
 
     public static String getUrlString(String urlSpec) throws IOException {
         return new String(getUrlBytes(urlSpec));
     }
 
+
+
     // function to parse JSON fetched from database to java object User
     public static User parseUser(User user, JSONObject jsonBody) throws JSONException, ParseException {
 
-        Log.i("Parse","User");
         user.setUsername(jsonBody.getString("username"));
         user.setFullName(jsonBody.getString("fullName"));
         user.setBirthday(jsonBody.getString("birthday"));
@@ -69,7 +80,6 @@ public class FetchData {
     // function to parse JSON fetched from database to java object UserExercise
     public static List<UserExercise> parseUserExercise(List<UserExercise> userExcList, JSONArray jsonArray) throws JSONException, ParseException {
 
-        Log.i("Parse","UserExercise");
         for (int i=0; i<jsonArray.length(); i++) {
 
             JSONObject userExc = jsonArray.getJSONObject(i);
@@ -90,9 +100,9 @@ public class FetchData {
         return userExcList;
     }
 
-    //function to pass json strings fetched from database to android entity Exercise (for dropdown list)
+    // function to parse JSON fetched from database to list (for dropdown list)
     public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray) throws JSONException, ParseException {
-        Log.i("Parse","Exercise");
+
         for (int i=0; i < jsonArray.length(); i++) {
             JSONObject oneObject = jsonArray.getJSONObject(i);
             String name = oneObject.getString("name");
@@ -101,5 +111,6 @@ public class FetchData {
 
         return exercises;
     }
+
 
 }
