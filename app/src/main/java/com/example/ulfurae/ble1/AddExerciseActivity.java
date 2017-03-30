@@ -1,7 +1,7 @@
 package com.example.ulfurae.ble1;
 
-import android.content.Context;
 import android.content.Intent;
+import android.net.ParseException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -14,18 +14,10 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONStringer;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import entities.Exercise;
 
 /**
  * Created by heidrunh on 2.3.2017.
@@ -35,11 +27,13 @@ public class AddExerciseActivity extends MenuActivity{
 
     private Spinner spinner;
     private static List<String> exercisesList = new ArrayList<String>();
+    private Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addexercise);
+
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -65,14 +59,19 @@ public class AddExerciseActivity extends MenuActivity{
             Log.e("FetchData","Failed to parse JSON", je);
         } catch(ParseException pe) {
             Log.e("FetchData", "Failed to parse date", pe);
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
         }
 
         String[] exercises = new String[exercisesList.size()];
         exercises = exercisesList.toArray(exercises);
 
+
+        extras = getIntent().getExtras();
+
         //dropdown list of exercises
         spinner = (Spinner)findViewById(R.id.exerciseSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, exercises);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, extras.getStringArray("exercises"));
         spinner.setAdapter(adapter);
 
         exercisesList.clear();
@@ -93,7 +92,7 @@ public class AddExerciseActivity extends MenuActivity{
         String exercise = exerciseTxt.getSelectedItem().toString();
 
         //get logged in user
-        Bundle extras = getIntent().getExtras();
+
         String userName = extras.getString("Username");
 
         if (android.os.Build.VERSION.SDK_INT > 9) {

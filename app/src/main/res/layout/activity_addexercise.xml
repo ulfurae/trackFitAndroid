@@ -42,7 +42,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="reps"
-        android:focusable="false"
         android:inputType="numberDecimal" />
 
     <EditText
@@ -51,7 +50,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="weight"
-        android:focusable="false"
         android:inputType="numberDecimal" />
 
     <Button

@@ -1,8 +1,6 @@
 package com.example.ulfurae.ble1;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,11 +8,9 @@ import android.os.StrictMode;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -22,13 +18,8 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,15 +33,17 @@ import entities.UserExercise;
 public class ViewExerciseActivity extends MenuActivity {
 
     private static List<UserExercise> userExercise = new ArrayList<UserExercise>();
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Bundle extras = getIntent().getExtras();
-        String userName = extras.getString("Username");
-
         setContentView(R.layout.activity_exerciselog);
+
+        extras = getIntent().getExtras();
+
+        String userName = extras.getString("Username");
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -94,6 +87,8 @@ public class ViewExerciseActivity extends MenuActivity {
     public void addToTable(final List<UserExercise> userExercise) {
         TableLayout table = (TableLayout) findViewById(R.id.exerciseTable);
 
+        String[] exercises = extras.getStringArray("exercises");
+
         for(int i = 0; i<userExercise.size();i++){
             final UserExercise uExercise = userExercise.get(i);
 
@@ -130,6 +125,14 @@ public class ViewExerciseActivity extends MenuActivity {
             weight.setText(spannableWeight);
             weight.setTextColor(Color.BLUE);
 
+            for (int u=0;u < exercise.length();u++) {
+                if (u+1 == uExercise.getExerciseID()) {
+                    exercise.setText(exercises[u]);
+                    break;
+                }
+            }
+
+            exercise.equals(uExercise.getExerciseID());
             TextView userExerciseId = new TextView(this.getApplicationContext());
             userExerciseId.setVisibility(View.INVISIBLE);
             userExerciseId.setText(Long.toString(uExercise.getId()));

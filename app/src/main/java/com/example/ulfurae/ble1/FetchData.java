@@ -53,53 +53,41 @@ public class FetchData {
         return new String(getUrlBytes(urlSpec));
     }
 
-    //function to pass json strings fetched from database to android entity User
+    // function to parse JSON fetched from database to java object User
     public static User parseUser(User user, JSONObject jsonBody) throws JSONException, ParseException {
+
         Log.i("Parse","User");
-
-        String userName = jsonBody.getString("username");
-        String name = jsonBody.getString("fullName");
-        String birthday = jsonBody.getString("birthday");
-        int height = jsonBody.getInt("height");
-        int weight = jsonBody.getInt("weight");
-
-        user.setUsername(userName);
-        user.setFullName(name);
-        user.setBirthday(birthday);
-        user.setHeight(height);
-        user.setWeight(weight);
+        user.setUsername(jsonBody.getString("username"));
+        user.setFullName(jsonBody.getString("fullName"));
+        user.setBirthday(jsonBody.getString("birthday"));
+        user.setHeight(jsonBody.getInt("height"));
+        user.setWeight(jsonBody.getInt("weight"));
 
         return user;
     }
 
-    //function to pass json strings fetched from database to android entity UserExercise
-    public static List<UserExercise> parseUserExercise(List<UserExercise> userExercises, JSONArray jsonArray) throws JSONException, ParseException {
+    // function to parse JSON fetched from database to java object UserExercise
+    public static List<UserExercise> parseUserExercise(List<UserExercise> userExcList, JSONArray jsonArray) throws JSONException, ParseException {
+
         Log.i("Parse","UserExercise");
-
         for (int i=0; i<jsonArray.length(); i++) {
-            JSONObject oneObject = jsonArray.getJSONObject(i);
-            int repetition = Integer.parseInt(oneObject.getString("unit1"));
-            int weight = Integer.parseInt(oneObject.getString("unit2"));
-            int exerciseID = oneObject.getInt("exerciseID");
-            String date = oneObject.getString("date");
-            Long userExerciseId = oneObject.getLong("id");
-            Long userId = oneObject.getLong("userID");
-            Long userGoalId = oneObject.getLong("userGoalID");
 
-            UserExercise uExercise = new UserExercise();
+            JSONObject userExc = jsonArray.getJSONObject(i);
 
-            uExercise.setUnit1(repetition);
-            uExercise.setUnit2(weight);
-            uExercise.setExerciseID(exerciseID);
-            uExercise.setDate(date);
-            uExercise.setId(userExerciseId);
-            uExercise.setUserID(userId);
-            uExercise.setUserGoalID(userGoalId);
+            UserExercise newUserExc = new UserExercise();
 
-            userExercises.add(uExercise);
+            newUserExc.setUnit1(userExc.getInt("unit1"));
+            newUserExc.setUnit2(userExc.getInt("unit2"));
+            newUserExc.setExerciseID(userExc.getInt("exerciseID"));
+            newUserExc.setDate(userExc.getString("date"));
+            newUserExc.setId(userExc.getLong("id"));
+            newUserExc.setUserID(userExc.getLong("userID"));
+            newUserExc.setUserGoalID(userExc.getLong("userGoalID"));
+
+            userExcList.add(newUserExc);
 
         }
-        return userExercises;
+        return userExcList;
     }
 
     //function to pass json strings fetched from database to android entity Exercise (for dropdown list)
