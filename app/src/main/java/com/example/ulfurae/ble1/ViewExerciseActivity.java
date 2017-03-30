@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ulfurae.ble1.entities.Exercise;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import org.json.JSONArray;
@@ -56,8 +58,9 @@ public class ViewExerciseActivity extends MenuActivity {
                     .buildUpon()
                     .appendQueryParameter("userName",userName)
                     .build().toString();
-            Log.i("Urlið", url);
+
             String jsonString = HTTPHandler.requestUrl(url);
+
             if(!jsonString.equals("null")){
                 Log.i("HTTPHandler","Received JSON: "+jsonString);
                 JSONArray jsonArray = new JSONArray(jsonString);
@@ -71,13 +74,10 @@ public class ViewExerciseActivity extends MenuActivity {
                 Toast.makeText(getApplicationContext(), "Failed getting exercises", Toast.LENGTH_SHORT).show();
             }
 
-        } catch(IOException ioe) {
-            Log.e("HTTPHandler", "Failed to fetch items", ioe);
-        } catch (JSONException je) {
-            Log.e("HTTPHandler","Failed to parse JSON", je);
-        } catch(ParseException pe) {
-            Log.e("HTTPHandler", "Failed to parse date", pe);
         }
+        catch(IOException ioe)   {  Log.e("HTTPHandler", "Failed to fetch items", ioe); }
+        catch(JSONException je)  { Log.e("HTTPHandler","Failed to parse JSON", je); }
+        catch(ParseException pe) { Log.e("HTTPHandler", "Failed to parse date", pe); }
     }
 
     /**
@@ -87,7 +87,6 @@ public class ViewExerciseActivity extends MenuActivity {
     public void addToTable(final List<UserExercise> userExercise) {
         TableLayout table = (TableLayout) findViewById(R.id.exerciseTable);
 
-        String[] exercises = extras.getStringArray("exercises");
 
         for(int i = 0; i<userExercise.size();i++){
             final UserExercise uExercise = userExercise.get(i);
@@ -117,7 +116,7 @@ public class ViewExerciseActivity extends MenuActivity {
 
             TextView exercise = new TextView(this.getApplicationContext());
             exercise.setLayoutParams(lp);
-            changeExerciseIDToName(exercise, uExercise);
+            changeExerciseToName(exercise, uExercise);
             exercise.setTextColor(0xFF000000);
 
             TextView weight = new TextView(this.getApplicationContext());
@@ -181,7 +180,10 @@ public class ViewExerciseActivity extends MenuActivity {
         exerciseDate.setText(userExercise.getDate());
 
         TextView exercise = (TextView) dialogView.findViewById(R.id.exerciseInEntry);
-        changeExerciseIDToName(exercise, userExercise);
+        changeExerciseToName(exercise, userExercise);
+
+        TextView type = (TextView) dialogView.findViewById(R.id.typeInEntry);
+        changeExerciseToType(type, userExercise);
 
         TextView weight = (TextView) dialogView.findViewById(R.id.weight);
         weight.setText(Integer.toString(userExercise.getUnit2()));
@@ -194,13 +196,21 @@ public class ViewExerciseActivity extends MenuActivity {
         alertDialog.show();
     }
 
-    public void changeExerciseIDToName(TextView view, UserExercise uExercise) {
-        String[] exercises = extras.getStringArray("exercises");
+    public void changeExerciseToName(TextView view, UserExercise uExercise) {
+        List<Exercise>  exercises = (List<Exercise>) extras.getSerializable("exercises");
 
-        for (int j=1;j < exercises.length ;j++) {
-            if (j == uExercise.getExerciseID()) {
-                view.setText(exercises[j]);
-            }
+        for (int j=0;j < exercises.size() ;j++) {
+            if (exercises.get(j).getId() == uExercise.getExerciseID())
+                view.setText(exercises.get(j).getName());
+        }
+    }
+
+    public void changeExerciseToType(TextView view, UserExercise uExercise) {
+        List<Exercise>  exercises = (List<Exercise>) extras.getSerializable("exercises");
+
+        for (int j=0;j < exercises.size() ;j++) {
+            if (exercises.get(j).getId() == uExercise.getExerciseID())
+                view.setText(exercises.get(j).gettype());
         }
     }
 

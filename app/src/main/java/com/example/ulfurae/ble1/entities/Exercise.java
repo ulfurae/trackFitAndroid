@@ -1,6 +1,8 @@
 package com.example.ulfurae.ble1.entities;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
 
     // Declare that this attribute is the id
 
@@ -43,8 +45,6 @@ public class Exercise {
     // This is for easier debug.
     @Override
     public String toString() {
-        return String.format(
-                "Exercise[name=%s, type=%s]",
-                name,type);
+        return this.name;
     }
 }

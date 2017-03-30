@@ -55,7 +55,6 @@ public class ProfileActivity extends MenuActivity {
             String name = jsonBody.getString("fullName");
             user = JsonMapper.parseUser(user, jsonBody);
 
-            Log.i("Url", url);
             Log.i("HTTPHandler","Received JSON: " + jsonString);
             Log.i("HTTPHandler", "Received JSON Object: " + jsonBody);
         }

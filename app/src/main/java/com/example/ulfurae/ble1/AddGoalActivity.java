@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.View.OnTouchListener;
 
+import com.example.ulfurae.ble1.entities.Exercise;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
@@ -59,10 +60,11 @@ public class AddGoalActivity extends MenuActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
+        List<Exercise> exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         //dropdown list of exercises
-        spinner = (Spinner)findViewById(R.id.exerciseSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, extras.getStringArray("exercises"));
+        spinner = (Spinner) findViewById(R.id.exerciseSpinner);
+        ArrayAdapter<Exercise> adapter = new ArrayAdapter<Exercise>(this, android.R.layout.simple_spinner_dropdown_item, exercises);
         spinner.setAdapter(adapter);
     }
 
@@ -161,8 +163,9 @@ public class AddGoalActivity extends MenuActivity {
                     .appendQueryParameter("endDate",stringendDate)
                     .appendQueryParameter("status", "Not completed")
                     .build().toString();
-            Log.i("Urlið",url);
+
             String jsonString = HTTPHandler.requestUrl(url);
+
             if(jsonString.equals("true")){
                 Toast.makeText(getApplicationContext(), "Goal saved", Toast.LENGTH_SHORT).show();
                 repetitionsTxt.setText("");
@@ -173,9 +176,8 @@ public class AddGoalActivity extends MenuActivity {
                 Toast.makeText(getApplicationContext(), "Failed to save goal", Toast.LENGTH_SHORT).show();
             }
 
-        } catch(IOException ioe) {
-            Log.e("HTTPHandler", "Failed to fetch items", ioe);
         }
+        catch(IOException ioe) { Log.e("HTTPHandler", "Failed to fetch items", ioe); }
     }
 
     //function for Goal Log button to go to Goal Log from Add Goal view

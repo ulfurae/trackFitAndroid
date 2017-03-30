@@ -13,6 +13,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.List;
 
+import com.example.ulfurae.ble1.entities.Exercise;
 import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.entities.UserExercise;
 
@@ -25,7 +26,8 @@ public class JsonMapper {
 
 
         // function to parse JSON fetched from database to java object User
-        public static User parseUser(User user, JSONObject jsonBody) throws JSONException, ParseException {
+        public static User parseUser(User user, JSONObject jsonBody)
+                throws JSONException, ParseException {
 
             user.setUsername(jsonBody.getString("username"));
             user.setFullName(jsonBody.getString("fullName"));
@@ -37,7 +39,8 @@ public class JsonMapper {
         }
 
         // function to parse JSON fetched from database to java object UserExercise
-        public static List<UserExercise> parseUserExercise(List<UserExercise> userExcList, JSONArray jsonArray) throws JSONException, ParseException {
+        public static List<UserExercise> parseUserExercise(List<UserExercise> userExcList, JSONArray jsonArray)
+                throws JSONException, ParseException {
 
             for (int i=0; i<jsonArray.length(); i++) {
 
@@ -59,8 +62,29 @@ public class JsonMapper {
             return userExcList;
         }
 
+    // function to parse JSON fetched from database to java object UserExercise
+    public static List<Exercise> parseExerciseList(List<Exercise> excList, JSONArray jsonArray)
+            throws JSONException, ParseException {
+
+        for (int i=0; i<jsonArray.length(); i++) {
+
+            JSONObject exercise = jsonArray.getJSONObject(i);
+
+            Exercise newExercise = new Exercise();
+
+            newExercise.setId(exercise.getLong("id"));
+            newExercise.setName(exercise.getString("name"));
+            newExercise.settype(exercise.getString("type"));
+
+            excList.add(newExercise);
+
+        }
+        return excList;
+    }
+
         // function to parse JSON fetched from database to list (for dropdown list)
-        public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray) throws JSONException, ParseException {
+        public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray)
+                throws JSONException, ParseException {
 
             for (int i=0; i < jsonArray.length(); i++) {
                 JSONObject oneObject = jsonArray.getJSONObject(i);

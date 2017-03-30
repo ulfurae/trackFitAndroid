@@ -11,9 +11,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.ulfurae.ble1.entities.Exercise;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by heidrunh on 4.3.2017.
  */
@@ -22,6 +26,7 @@ public class AddExerciseActivity extends MenuActivity{
 
     private Spinner spinner;
     private Bundle extras;
+    List<Exercise> exercises;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +34,11 @@ public class AddExerciseActivity extends MenuActivity{
         setContentView(R.layout.activity_addexercise);
         extras = getIntent().getExtras();
 
+        exercises = (List<Exercise>) extras.getSerializable("exercises");
+
         //dropdown list of exercises
-        spinner = (Spinner)findViewById(R.id.exerciseSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, extras.getStringArray("exercises"));
+        spinner = (Spinner) findViewById(R.id.exerciseSpinner);
+        ArrayAdapter<Exercise> adapter = new ArrayAdapter<Exercise>(this, android.R.layout.simple_spinner_dropdown_item, exercises);
         spinner.setAdapter(adapter);
 
     }
@@ -68,8 +75,9 @@ public class AddExerciseActivity extends MenuActivity{
                     .appendQueryParameter("rep",stringRepetitions)
                     .appendQueryParameter("amount",stringWeightLifted)
                     .build().toString();
-            Log.i("Urlið", url);
+
             String jsonString = HTTPHandler.requestUrl(url);
+
             if(jsonString.equals("true")){
                 Toast.makeText(getApplicationContext(), "Exercise saved", Toast.LENGTH_SHORT).show();
                 repetitionsTxt.setText("");
@@ -78,9 +86,8 @@ public class AddExerciseActivity extends MenuActivity{
                 Toast.makeText(getApplicationContext(), "Failed to save exercise", Toast.LENGTH_SHORT).show();
             }
 
-        } catch(IOException ioe) {
-            Log.e("HTTPHandler", "Failed to fetch items", ioe);
         }
+        catch(IOException ioe) {  Log.e("HTTPHandler", "Failed to fetch items", ioe);  }
     }
 
     //function for Exercise Log button to go to Exercise Log from Add Exercise view
@@ -89,7 +96,7 @@ public class AddExerciseActivity extends MenuActivity{
         //logged in mock user
         Intent intent = new Intent(this, ViewExerciseActivity.class);
         intent.putExtra("Username",loggedInUser);
-        intent.putExtra("exercises",extras.getStringArray("exercises"));
+        intent.putExtra("exercises", (Serializable) exercises);
         startActivity(intent);
     }
 }

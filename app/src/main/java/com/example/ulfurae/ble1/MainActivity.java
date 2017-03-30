@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 
+import com.example.ulfurae.ble1.entities.Exercise;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 import com.example.ulfurae.ble1.mappers.JsonMapper;
 
@@ -14,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +25,8 @@ public class MainActivity extends MenuActivity {
 
 
 
-    private static List<String> exercisesList = new ArrayList<String>();
-    private static String[] exercises;
+    private static List<Exercise> exercisesList = new ArrayList<Exercise>();
+    private static Exercise[] exercises;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +46,16 @@ public class MainActivity extends MenuActivity {
 
             String jsonString = HTTPHandler.requestUrl(url);
             JSONArray jsonArray = new JSONArray(jsonString);
-            exercisesList = JsonMapper.parseExercise(exercisesList, jsonArray);
+            //exercisesList = JsonMapper.parseExercise(exercisesList, jsonArray);
 
-            Log.i("Urlið", url);
+            exercisesList = JsonMapper.parseExerciseList(exercisesList, jsonArray);
+
+
             Log.i("HTTPHandler","Received JSON: " + jsonString);
         }
         catch (IOException ioe)   { Log.e("HTTPHandler", "Failed to fetch items", ioe); }
         catch (JSONException je)  { Log.e("HTTPHandler","Failed to parse JSON", je); }
         catch (ParseException pe) { Log.e("HTTPHandler", "Failed to parse date", pe); }
-
-        exercises = new String[exercisesList.size()];
-        exercises = exercisesList.toArray(exercises);
 
     }
 
@@ -72,7 +73,7 @@ public class MainActivity extends MenuActivity {
 
         Intent intent = new Intent(this, ViewExerciseActivity.class);
         intent.putExtra("Username",loggedInUser);
-        intent.putExtra("exercises",exercises);
+        intent.putExtra("exercises", (Serializable) exercisesList);
         startActivity(intent);
 
     }
@@ -90,7 +91,7 @@ public class MainActivity extends MenuActivity {
     public void viewAddExercise(View view) {
         Intent intent = new Intent(this, AddExerciseActivity.class);
         intent.putExtra("Username",loggedInUser);
-        intent.putExtra("exercises",exercises);
+        intent.putExtra("exercises",(Serializable) exercisesList);
         startActivity(intent);
     }
 
@@ -100,7 +101,7 @@ public class MainActivity extends MenuActivity {
 
         Intent intent = new Intent(this, AddGoalActivity.class);
         intent.putExtra("Username",loggedInUser);
-        intent.putExtra("exercises",exercises);
+        intent.putExtra("exercises",(Serializable) exercisesList);
         startActivity(intent);
     }
 

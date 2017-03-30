@@ -48,7 +48,7 @@ public class ChangeProfileActivity extends MenuActivity {
                     .appendQueryParameter("weight",stringWeight)
                     .appendQueryParameter("userName",userName)
                     .build().toString();
-            Log.i("Urlið", url);
+
             String jsonString = HTTPHandler.requestUrl(url);
 
             if(jsonString.equals("true")){
@@ -59,9 +59,8 @@ public class ChangeProfileActivity extends MenuActivity {
             } else {
                 Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_SHORT).show();
             }
-        } catch(IOException ioe) {
-            Log.e("HTTPHandler", "Failed to fetch items", ioe);
         }
+        catch(IOException ioe) { Log.e("HTTPHandler", "Failed to fetch items", ioe); }
 
     }
 }
