@@ -32,6 +32,7 @@ public class MainActivity extends MenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //setContentView(R.layout.activity_register);
         setContentView(R.layout.activity_main);
         exercisesList.clear();
 
@@ -82,6 +83,8 @@ public class MainActivity extends MenuActivity {
     public void viewGoalLog(View view) {
 
         Intent intent = new Intent(this, ViewGoalActivity.class);
+        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("exercises", (Serializable) exercisesList);
         startActivity(intent);
 
 
@@ -98,7 +101,6 @@ public class MainActivity extends MenuActivity {
 
     /*Called when the user clicks addgoal_btn */
     public void viewAddGoal(View view) {
-
         Intent intent = new Intent(this, AddGoalActivity.class);
         intent.putExtra("Username",loggedInUser);
         intent.putExtra("exercises",(Serializable) exercisesList);
