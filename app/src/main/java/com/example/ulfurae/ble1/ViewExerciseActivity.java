@@ -3,6 +3,7 @@ package com.example.ulfurae.ble1;
 import android.app.AlertDialog;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.StrictMode;
@@ -157,7 +158,7 @@ public class ViewExerciseActivity extends MenuActivity {
      * exercise entries that are clicked
      * @param userExercise contains all information about  each exercise entry
      */
-    public void showExerciseEntry(UserExercise userExercise) {
+    public void showExerciseEntry(final UserExercise userExercise) {
         final AlertDialog alertDialog = new AlertDialog.Builder(ViewExerciseActivity.this).create();
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.from(this).inflate(R.layout.activity_viewexerciseentry, null);
@@ -172,7 +173,7 @@ public class ViewExerciseActivity extends MenuActivity {
         Button delete = (Button) dialogView.findViewById(R.id.buttonDelete);
         delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                //Á eftir að útfæra
+                deleteEntry(userExercise);
             }
         });
 
@@ -213,6 +214,33 @@ public class ViewExerciseActivity extends MenuActivity {
             if (exercises.get(j).getId() == uExercise.getExerciseID())
                 view.setText(exercises.get(j).gettype());
         }
+    }
+
+    public void deleteEntry(UserExercise userExercise) {
+        if (Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        //construct URL query to send to database
+        try {
+            String url = Uri.parse("http://10.0.2.2:8080/deleteExercise?")
+                    .buildUpon()
+                    .appendQueryParameter("exerciseId",userExercise.getId().toString())
+                    .build().toString();
+
+            String jsonString = HTTPHandler.requestUrl(url);
+
+            if(jsonString.equals("true")){
+                Toast.makeText(getApplicationContext(), "Exercise deleted", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
+            } else {
+                Toast.makeText(getApplicationContext(), "Failed to delete exercise", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        catch(IOException ioe) {  Log.e("HTTPHandler", "Failed to fetch items", ioe);  }
     }
 
 }

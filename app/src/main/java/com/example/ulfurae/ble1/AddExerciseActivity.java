@@ -61,6 +61,7 @@ public class AddExerciseActivity extends MenuActivity{
 
         //get logged in user
 
+        System.out.println(userLoggedIn.getId().toString());
 
 
         if (Build.VERSION.SDK_INT > 9) {
