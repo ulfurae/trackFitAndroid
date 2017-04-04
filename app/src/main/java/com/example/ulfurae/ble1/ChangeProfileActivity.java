@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.example.ulfurae.ble1.entities.User;
 
@@ -20,17 +21,22 @@ import com.example.ulfurae.ble1.entities.User;
  */
 
 public class ChangeProfileActivity extends MenuActivity {
+
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_changeprofile);
+
+        Bundle extras = getIntent().getExtras();
+        user = (User) extras.getSerializable("user");
     }
 
     /* Called when the user clicks confirmchangeprofile_btn */
     public void changeProfile(View view) {
 
-        Bundle extras = getIntent().getExtras();
-        String userName = extras.getString("Username");
+
 
         EditText weightTxt = (EditText) findViewById(R.id.editProfileResult);
         String stringWeight = weightTxt.getText().toString();
@@ -41,20 +47,21 @@ public class ChangeProfileActivity extends MenuActivity {
         }
 
         //construct URL query to send to database
-        User user = new User();
+
         try {
             String url = Uri.parse("http://10.0.2.2:8080/changeProfile?")
                     .buildUpon()
                     .appendQueryParameter("weight",stringWeight)
-                    .appendQueryParameter("userName",userName)
+                    .appendQueryParameter("id",user.getId().toString())
                     .build().toString();
 
             String jsonString = HTTPHandler.requestUrl(url);
 
             if(jsonString.equals("true")){
                 Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(this, ProfileActivity.class);
-                intent.putExtra("Username",userName);
+                intent.putExtra("userLoggedIn", (Serializable) user);
                 startActivity(intent);
             } else {
                 Toast.makeText(getApplicationContext(), "Failure", Toast.LENGTH_SHORT).show();

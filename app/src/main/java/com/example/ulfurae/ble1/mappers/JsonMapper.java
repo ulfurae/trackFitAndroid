@@ -34,6 +34,7 @@ public class JsonMapper {
             user.setBirthday(jsonBody.getString("birthday"));
             user.setHeight(jsonBody.getInt("height"));
             user.setWeight(jsonBody.getInt("weight"));
+            user.setId(jsonBody.getLong("id"));
 
             return user;
         }

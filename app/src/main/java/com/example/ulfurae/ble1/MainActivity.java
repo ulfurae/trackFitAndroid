@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.ulfurae.ble1.entities.Exercise;
+import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 import com.example.ulfurae.ble1.mappers.JsonMapper;
 
@@ -27,14 +28,23 @@ public class MainActivity extends MenuActivity {
 
     private static List<Exercise> exercisesList = new ArrayList<Exercise>();
     private static Exercise[] exercises;
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setContentView(R.layout.activity_register);
         setContentView(R.layout.activity_main);
+       /* Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);*/
+
         exercisesList.clear();
+
+        extras = getIntent().getExtras();
+
+        userLoggedIn = (User) extras.getSerializable("userLoggedIn");
+
+        Log.i("LOGGED USER", userLoggedIn.getUsername());
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -106,6 +116,8 @@ public class MainActivity extends MenuActivity {
         intent.putExtra("exercises",(Serializable) exercisesList);
         startActivity(intent);
     }
+
+
 
 }
 

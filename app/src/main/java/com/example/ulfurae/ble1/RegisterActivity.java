@@ -1,5 +1,6 @@
 package com.example.ulfurae.ble1;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText birthday = (EditText) findViewById(R.id.birthday);
         final EditText height = (EditText) findViewById(R.id.height);
         final EditText weight = (EditText) findViewById(R.id.weight);
-        final int bmi = 23; //placeholder
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -41,19 +41,22 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             String url = Uri.parse("http://10.0.2.2:8080/registerUser?")
                     .buildUpon()
-                    .appendQueryParameter("userName", username.getText().toString())
-                    .appendQueryParameter("pass", password.getText().toString())
+                    .appendQueryParameter("username", username.getText().toString())
+                    .appendQueryParameter("password", password.getText().toString())
                     .appendQueryParameter("fullName", fullname.getText().toString())
                     .appendQueryParameter("birthday", birthday.getText().toString())
                     .appendQueryParameter("height", height.getText().toString())
                     .appendQueryParameter("weight", weight.getText().toString())
-                    .appendQueryParameter("bmi", String.valueOf(bmi))
                     .build().toString();
 
             String jsonString = HTTPHandler.requestUrl(url);
 
             if (jsonString.equals("true")) {
-                Toast.makeText(getApplicationContext(), "User saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "User saved, login now", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this, LoginActivity.class);
+
+                startActivity(intent);
 
             } else {
                 Toast.makeText(getApplicationContext(), "Failed to register user", Toast.LENGTH_SHORT).show();

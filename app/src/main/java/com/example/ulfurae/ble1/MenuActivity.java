@@ -7,6 +7,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.ulfurae.ble1.entities.User;
+
+import java.io.Serializable;
+
 /**
  * Created by ulfurae on 18.2.2017.
  */
@@ -16,6 +20,8 @@ import android.view.View;
 public class MenuActivity extends AppCompatActivity {
 
     String loggedInUser = "tester2";
+
+    User userLoggedIn;
 
     //
     @Override
@@ -31,6 +37,7 @@ public class MenuActivity extends AppCompatActivity {
         switch (item.getTitle().toString()) {
             case "Home":
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("userLoggedIn",(Serializable) userLoggedIn);
                 startActivity(intent);
                 return true;
             case "Profile":
@@ -48,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
     public void viewProfile(View view)  {
 
         Intent intent = new Intent(this, ProfileActivity.class);
-        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("userLoggedIn",(Serializable) userLoggedIn);
         startActivity(intent);
 
     }

@@ -1,6 +1,8 @@
 package com.example.ulfurae.ble1.entities;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     // Declare that this attribute is the id
 

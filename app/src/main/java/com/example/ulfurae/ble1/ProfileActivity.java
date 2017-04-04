@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.ParseException;
 
 import com.example.ulfurae.ble1.entities.BMI;
@@ -36,23 +37,20 @@ public class ProfileActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
 
         Bundle extras = getIntent().getExtras();
-        String userName = extras.getString("Username");
 
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        userLoggedIn = (User) extras.getSerializable("userLoggedIn");
 
+        Log.i("LOGGED USER PROFILE", userLoggedIn.getUsername());
+        
         try {
             String url = Uri.parse("http://10.0.2.2:8080/profile?")
                     .buildUpon()
-                    .appendQueryParameter("name",userName)
+                    .appendQueryParameter("name",userLoggedIn.getUsername())
                     .build().toString();
 
             String jsonString = HTTPHandler.requestUrl(url);
             JSONObject jsonBody = new JSONObject(jsonString);
 
-            String name = jsonBody.getString("fullName");
             user = JsonMapper.parseUser(user, jsonBody);
 
             Log.i("HTTPHandler","Received JSON: " + jsonString);
@@ -61,6 +59,7 @@ public class ProfileActivity extends MenuActivity {
         catch(IOException ioe)   { Log.e("HTTPHandler", "Failed to fetch items", ioe); }
         catch(JSONException je)  {  Log.e("HTTPHandler","Failed to parse JSON", je); }
         catch(ParseException pe) { Log.e("HTTPHandler", "Failed to parse date", pe); }
+
 
         setContentView(R.layout.activity_profile);
 
@@ -97,11 +96,10 @@ public class ProfileActivity extends MenuActivity {
     /* Called when the user clicks changeweight_btn */
     public void viewChangeWeight(View view) {
 
-        String userName = user.getUsername();
-        int weight = user.getWeight();
+        Log.i("USER NOW : ", user.getId().toString());
 
         Intent intent = new Intent(this, ChangeProfileActivity.class);
-        intent.putExtra("Username",userName);
+        intent.putExtra("user", (Serializable) user);
         startActivity(intent);
     }
 
