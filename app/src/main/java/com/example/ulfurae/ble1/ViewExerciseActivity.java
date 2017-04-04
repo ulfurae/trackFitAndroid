@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ulfurae.ble1.entities.Exercise;
+import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import org.json.JSONArray;
@@ -43,7 +44,7 @@ public class ViewExerciseActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
 
         extras = getIntent().getExtras();
-        String userName = extras.getString("Username");
+        userLoggedIn = (User) extras.getSerializable("userLoggedIn");
 
         setContentView(R.layout.activity_exerciselog);
 
@@ -56,7 +57,7 @@ public class ViewExerciseActivity extends MenuActivity {
         try {
             String url = Uri.parse("http://10.0.2.2:8080/exerciseLog?")
                     .buildUpon()
-                    .appendQueryParameter("userName",userName)
+                    .appendQueryParameter("userId",userLoggedIn.getId().toString())
                     .build().toString();
 
             String jsonString = HTTPHandler.requestUrl(url);

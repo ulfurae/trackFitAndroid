@@ -2,6 +2,7 @@ package com.example.ulfurae.ble1;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ulfurae.ble1.entities.Exercise;
+import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class AddExerciseActivity extends MenuActivity{
         extras = getIntent().getExtras();
 
         exercises = (List<Exercise>) extras.getSerializable("exercises");
+        userLoggedIn = (User) extras.getSerializable("userLoggedIn");
 
         //dropdown list of exercises
         spinner = (Spinner) findViewById(R.id.exerciseSpinner);
@@ -58,9 +61,9 @@ public class AddExerciseActivity extends MenuActivity{
 
         //get logged in user
 
-        String userName = extras.getString("Username");
 
-        if (android.os.Build.VERSION.SDK_INT > 9) {
+
+        if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
@@ -69,7 +72,7 @@ public class AddExerciseActivity extends MenuActivity{
         try {
             String url = Uri.parse("http://10.0.2.2:8080/addExercise?")
                     .buildUpon()
-                    .appendQueryParameter("userName",userName)
+                    .appendQueryParameter("userId",userLoggedIn.getId().toString())
                     .appendQueryParameter("goalID","0")
                     .appendQueryParameter("exercise",exercise)
                     .appendQueryParameter("rep",stringRepetitions)
@@ -95,7 +98,7 @@ public class AddExerciseActivity extends MenuActivity{
 
         //logged in mock user
         Intent intent = new Intent(this, ViewExerciseActivity.class);
-        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
         intent.putExtra("exercises", (Serializable) exercises);
         startActivity(intent);
     }

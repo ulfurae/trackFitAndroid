@@ -44,7 +44,7 @@ public class MainActivity extends MenuActivity {
 
         userLoggedIn = (User) extras.getSerializable("userLoggedIn");
 
-        Log.i("LOGGED USER", userLoggedIn.getUsername());
+        //Log.i("LOGGED USER", userLoggedIn.getUsername());
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -83,7 +83,7 @@ public class MainActivity extends MenuActivity {
     public void viewExerciseLog(View view) {
 
         Intent intent = new Intent(this, ViewExerciseActivity.class);
-        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
         intent.putExtra("exercises", (Serializable) exercisesList);
         startActivity(intent);
 
@@ -93,7 +93,7 @@ public class MainActivity extends MenuActivity {
     public void viewGoalLog(View view) {
 
         Intent intent = new Intent(this, ViewGoalActivity.class);
-        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
         intent.putExtra("exercises", (Serializable) exercisesList);
         startActivity(intent);
 
@@ -103,7 +103,7 @@ public class MainActivity extends MenuActivity {
     /*Called when the user clicks addexercise_btn  */
     public void viewAddExercise(View view) {
         Intent intent = new Intent(this, AddExerciseActivity.class);
-        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
         intent.putExtra("exercises",(Serializable) exercisesList);
         startActivity(intent);
     }
@@ -112,7 +112,7 @@ public class MainActivity extends MenuActivity {
     /*Called when the user clicks addgoal_btn */
     public void viewAddGoal(View view) {
         Intent intent = new Intent(this, AddGoalActivity.class);
-        intent.putExtra("Username",loggedInUser);
+        intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
         intent.putExtra("exercises",(Serializable) exercisesList);
         startActivity(intent);
     }

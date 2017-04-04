@@ -17,6 +17,7 @@ import android.widget.Toast;
 import android.view.View.OnTouchListener;
 
 import com.example.ulfurae.ble1.entities.Exercise;
+import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
@@ -47,6 +48,7 @@ public class AddGoalActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addgoal);
         extras = getIntent().getExtras();
+        userLoggedIn = (User) extras.getSerializable("userLoggedIn");
 
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
@@ -142,9 +144,9 @@ public class AddGoalActivity extends MenuActivity {
         Spinner exerciseTxt = (Spinner) findViewById(R.id.exerciseSpinner);
         String exercise = exerciseTxt.getSelectedItem().toString();
 
-        //get logged in user
+        //get logged in userLoggedIn
         Bundle extras = getIntent().getExtras();
-        String userName = extras.getString("Username");
+
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -155,7 +157,7 @@ public class AddGoalActivity extends MenuActivity {
         try {
             String url = Uri.parse("http://10.0.2.2:8080/addGoal?")
                     .buildUpon()
-                    .appendQueryParameter("userName",userName)
+                    .appendQueryParameter("userId", userLoggedIn.getId().toString())
                     .appendQueryParameter("exercise",exercise)
                     .appendQueryParameter("rep",stringRepetitions)
                     .appendQueryParameter("amount",stringgoalWeight)
