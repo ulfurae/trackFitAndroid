@@ -1,11 +1,14 @@
 package com.example.ulfurae.ble1;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
@@ -13,6 +16,9 @@ import android.widget.Toast;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -20,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        setDateTimeField();
 
     }
 
@@ -65,6 +73,35 @@ public class RegisterActivity extends AppCompatActivity {
         } catch (IOException ioe) {
             Log.e("HTTPHandler", "Failed to fetch items", ioe);
         }
+    }
+
+    private DatePickerDialog userBD;
+
+    private void setDateTimeField() {
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+
+        final EditText userBDEditText = (EditText) findViewById(R.id.birthday);
+        Calendar newCalendar = Calendar.getInstance();
+        userBD = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+                userBDEditText.setText(dateFormat.format(newDate.getTime()));
+            }
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+
+        userBDEditText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent e) {
+                if (e.getAction() == MotionEvent.ACTION_DOWN) {
+                    userBD.show();
+                }
+                return false;
+            }
+        });
     }
 }
 

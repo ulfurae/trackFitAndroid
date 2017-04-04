@@ -41,7 +41,7 @@ public class ProfileActivity extends MenuActivity {
         userLoggedIn = (User) extras.getSerializable("userLoggedIn");
 
         Log.i("LOGGED USER PROFILE", userLoggedIn.getUsername());
-        
+
         try {
             String url = Uri.parse("http://10.0.2.2:8080/profile?")
                     .buildUpon()

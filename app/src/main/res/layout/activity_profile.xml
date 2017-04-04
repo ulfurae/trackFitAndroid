@@ -147,7 +147,7 @@
             android:onClick="viewChangeWeight"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Change wheight"
+            android:text="Change weight"
             android:textAppearance="@style/TextAppearance.AppCompat.Inverse"
             android:textColor="@android:color/black" />
     </GridLayout>

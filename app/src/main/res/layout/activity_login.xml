@@ -51,23 +51,24 @@ android:background="?android:attr/windowBackground">
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/password"
+        android:background="@android:color/holo_blue_dark"
         android:onClick="login"
-        android:text="Login" />
+        android:text="Login"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/tvRegisterHere"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/btLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp"
-        android:background="@color/colorNEW"
+        android:layout_marginTop="72dp"
+        android:background="@android:color/holo_green_light"
         android:onClick="viewRegister"
-        android:paddingLeft="15px"
-        android:paddingRight="15px"
-        android:text="Register Here"
+        android:text="Sign up here!"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/background_light"
-        android:textSize="22sp" />
+        android:textSize="28sp"
+        android:textStyle="bold" />
 </RelativeLayout>
