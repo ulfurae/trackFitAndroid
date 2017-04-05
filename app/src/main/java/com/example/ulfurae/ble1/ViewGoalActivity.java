@@ -98,6 +98,7 @@ public class ViewGoalActivity extends MenuActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), ViewGoalEntryActivity.class);
+                    //ATH: Hér þarf að gera putExtra og einhvernveginn flytja æfinguna yfir í nýtt activity
                     view.getContext().startActivity(intent);
                 }
             });
