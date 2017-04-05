@@ -21,7 +21,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
@@ -30,7 +30,7 @@
         android:imeOptions="actionDone"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
@@ -44,30 +44,36 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="start"
         android:id="@+id/startDate" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="end"
         android:id="@+id/endDate" />
 
     <Button
+        android:id="@+id/saveGoal"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:text="Save Goal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/saveGoal"
-        android:onClick="addGoal" />
+        android:onClick="addGoal"
+        android:textSize="20sp"/>
 
     <Button
+        android:id="@+id/goalLog"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:text="Goal Log"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/goalLog"
-        android:onClick="goToViewGoals"/>
+        android:backgroundTint="@color/colorNEW"
+        android:onClick="goToViewGoals"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"/>
 </LinearLayout>

@@ -9,16 +9,16 @@ public class UserGoal {
     private Long id;
 
     private Long userID;
-    private Long exerciseID;
+    private int exerciseID;
     private int unit1;
     private int unit2;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String status;
 
     public UserGoal() {  }
 
-    public UserGoal(Long userID, Long exerciseID, int unit1, int unit2, Date startDate, Date endDate, String status) {
+    public UserGoal(Long userID, int exerciseID, int unit1, int unit2, String startDate, String endDate, String status) {
         this.userID = userID;
         this.exerciseID = exerciseID;
         this.unit1 = unit1;
@@ -44,11 +44,11 @@ public class UserGoal {
         this.userID = userID;
     }
 
-    public Long getExerciseID() {
+    public int getExerciseID() {
         return exerciseID;
     }
 
-    public void setExerciseID(Long exerciseID) {
+    public void setExerciseID(int exerciseID) {
         this.exerciseID = exerciseID;
     }
 
@@ -68,17 +68,17 @@ public class UserGoal {
         this.unit2 = unit2;
     }
 
-    public Date getStartDate() { return startDate; }
+    public String getStartDate() { return startDate; }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

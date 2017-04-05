@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.ulfurae.ble1.entities.Exercise;
 import com.example.ulfurae.ble1.entities.User;
+import com.example.ulfurae.ble1.entities.UserGoal;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import org.json.JSONArray;
@@ -201,7 +202,7 @@ public class ViewExerciseActivity extends MenuActivity {
     public void changeExerciseToName(TextView view, UserExercise uExercise) {
         List<Exercise>  exercises = (List<Exercise>) extras.getSerializable("exercises");
 
-        for (int j=0;j < exercises.size() ;j++) {
+        for (int j = 0; j < exercises.size(); j++) {
             if (exercises.get(j).getId() == uExercise.getExerciseID())
                 view.setText(exercises.get(j).getName());
         }

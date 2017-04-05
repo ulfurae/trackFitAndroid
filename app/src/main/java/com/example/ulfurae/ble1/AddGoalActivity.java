@@ -21,6 +21,7 @@ import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.handlers.HTTPHandler;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,12 +36,12 @@ import java.util.Locale;
 public class AddGoalActivity extends MenuActivity {
 
     private Spinner spinner;
-    private static List<String> exercisesList = new ArrayList<String>();
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
     private SimpleDateFormat dateFormat;
     private EditText fromDateEditText;
     private EditText toDateEditText;
+    List<Exercise> exercises;
     private Bundle extras;
 
     @Override
@@ -48,7 +49,9 @@ public class AddGoalActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addgoal);
         extras = getIntent().getExtras();
+
         userLoggedIn = (User) extras.getSerializable("userLoggedIn");
+        exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
 
@@ -61,8 +64,6 @@ public class AddGoalActivity extends MenuActivity {
                     StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
-        List<Exercise> exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         //dropdown list of exercises
         spinner = (Spinner) findViewById(R.id.exerciseSpinner);
@@ -187,7 +188,8 @@ public class AddGoalActivity extends MenuActivity {
 
         //logged in mock user
         Intent intent = new Intent(this, ViewGoalActivity.class);
-        intent.putExtra("Username","tester2");
+        intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
+        intent.putExtra("exercises", (Serializable) exercises);
         startActivity(intent);
     }
 }

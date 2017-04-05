@@ -16,6 +16,7 @@ import java.util.List;
 import com.example.ulfurae.ble1.entities.Exercise;
 import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.entities.UserExercise;
+import com.example.ulfurae.ble1.entities.UserGoal;
 
 /**
  * Created by ulfurae on 30.3.2017.
@@ -63,25 +64,23 @@ public class JsonMapper {
             return userExcList;
         }
 
-    // function to parse JSON fetched from database to java object UserExercise
-    public static List<Exercise> parseExerciseList(List<Exercise> excList, JSONArray jsonArray)
-            throws JSONException, ParseException {
+        // function to parse JSON fetched from database to java object UserExercise
+        public static List<Exercise> parseExerciseList(List<Exercise> excList, JSONArray jsonArray)
+                throws JSONException, ParseException {
 
-        for (int i=0; i<jsonArray.length(); i++) {
+            for (int i=0; i<jsonArray.length(); i++) {
+                JSONObject exercise = jsonArray.getJSONObject(i);
+                Exercise newExercise = new Exercise();
 
-            JSONObject exercise = jsonArray.getJSONObject(i);
+                newExercise.setId(exercise.getLong("id"));
+                newExercise.setName(exercise.getString("name"));
+                newExercise.settype(exercise.getString("type"));
 
-            Exercise newExercise = new Exercise();
+                excList.add(newExercise);
 
-            newExercise.setId(exercise.getLong("id"));
-            newExercise.setName(exercise.getString("name"));
-            newExercise.settype(exercise.getString("type"));
-
-            excList.add(newExercise);
-
+            }
+            return excList;
         }
-        return excList;
-    }
 
         // function to parse JSON fetched from database to list (for dropdown list)
         public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray)
@@ -92,9 +91,33 @@ public class JsonMapper {
                 String name = oneObject.getString("name");
                 exercises.add(name);
             }
-
             return exercises;
         }
 
+    // function to parse JSON fetched from database to java object UserExercise
+    public static List<UserGoal> parseUserGoal(List<UserGoal> userGoalList, JSONArray jsonArray)
+            throws JSONException, ParseException {
 
+        for (int i=0; i<jsonArray.length(); i++) {
+
+            JSONObject userGoal = jsonArray.getJSONObject(i);
+
+            UserGoal newUserGoal = new UserGoal();
+
+            newUserGoal.setUnit1(userGoal.getInt("unit1"));
+            newUserGoal.setUnit2(userGoal.getInt("unit2"));
+            newUserGoal.setId(userGoal.getLong("id"));
+            newUserGoal.setStartDate(userGoal.getString("startDate"));
+            newUserGoal.setEndDate(userGoal.getString("endDate"));
+            newUserGoal.setUserID(userGoal.getLong("userID"));
+            newUserGoal.setExerciseID(userGoal.getInt("exerciseID"));
+            newUserGoal.setStatus(userGoal.getString("status"));
+
+            userGoalList.add(newUserGoal);
+
+        }
+        return userGoalList;
     }
+
+
+}
