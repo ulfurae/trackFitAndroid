@@ -1,9 +1,14 @@
 package com.example.ulfurae.ble1;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ulfurae.ble1.entities.UserExercise;
@@ -69,6 +74,74 @@ public class ViewGoalActivity extends MenuActivity {
         catch(ParseException pe) { Log.e("HTTPHandler", "Failed to parse date", pe); }
 */
     }
+/*
+    public void addToTable(final List<UserExercise> userExercise) {
+        TableLayout table = (TableLayout) findViewById(R.id.exerciseTable);
 
-    //Á eftir að útfæra
+
+        for(int i = 0; i<userExercise.size();i++){
+            final UserExercise uExercise = userExercise.get(i);
+
+            TableRow row= new TableRow(this);
+            if(i%2 != 0)row.setBackgroundColor(Color.LTGRAY);
+            row.setMinimumHeight(120);
+            row.setClickable(true);
+            row.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    showExerciseEntry(uExercise);
+                }
+            });
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.FILL_PARENT,TableRow.LayoutParams.WRAP_CONTENT );
+
+            int leftMargin=10;
+            int topMargin=10;
+            int rightMargin=100;
+            int bottomMargin=10;
+
+            lp.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
+
+            TextView exerciseDate = new TextView(this.getApplicationContext());
+            exerciseDate.setLayoutParams(lp);
+            exerciseDate.setText(uExercise.getDate());
+            exerciseDate.setTextColor(0xFF000000);
+
+            TextView exercise = new TextView(this.getApplicationContext());
+            exercise.setLayoutParams(lp);
+            changeExerciseToName(exercise, uExercise);
+            exercise.setTextColor(0xFF000000);
+
+            TextView weight = new TextView(this.getApplicationContext());
+            weight.setLayoutParams(lp);
+            //SpannableString spannableWeight = new SpannableString(Integer.toString(uExercise.getUnit2()));
+            //spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
+            weight.setText(Integer.toString(uExercise.getUnit2()));
+            weight.setTextColor(Color.DKGRAY);
+
+            TextView reps = new TextView(this.getApplicationContext());
+            reps.setLayoutParams(lp);
+            //SpannableString spannableWeight = new SpannableString(Integer.toString(uExercise.getUnit2()));
+            //spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
+            reps.setText(Integer.toString(uExercise.getUnit1()));
+            reps.setTextColor(Color.DKGRAY);
+
+            exercise.equals(uExercise.getExerciseID());
+            TextView userExerciseId = new TextView(this.getApplicationContext());
+            userExerciseId.setVisibility(View.INVISIBLE);
+            userExerciseId.setText(Long.toString(uExercise.getId()));
+            userExerciseId.setTextColor(0xFF000000);
+
+            row.addView(exerciseDate);
+            row.addView(exercise);
+            row.addView(reps);
+            row.addView(weight);
+            row.addView(userExerciseId);
+
+            table.addView(row,i);
+        }
+
+        userExercise.clear();
+    }
+        */
+
+    // TODO NEW INTENT ÞEGAR ÝTT er á goal entry
 }
