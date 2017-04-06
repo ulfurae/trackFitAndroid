@@ -94,6 +94,35 @@ public class ViewGoalEntryActivity extends MenuActivity {
         catch(IOException ioe) {  Log.e("HTTPHandler", "Failed to fetch items", ioe);  }
     }
 
+    /*public void changeGoalStatus(View view) {
+        TextView goalIdTxt = (TextView) findViewById(R.id.goalId);
+        String goalId = goalIdTxt.getText().toString();
+
+        if (Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+        //construct URL query to send to database
+        try {
+            String url = Uri.parse("http://10.0.2.2:8080/changeGoalStatus?")
+                    .buildUpon()
+                    .appendQueryParameter("goalId", goalId)
+                    .build().toString();
+
+            String jsonString = HTTPHandler.requestUrl(url);
+
+            if(jsonString.equals("true")){
+                Toast.makeText(getApplicationContext(), "Status updated", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Failed to update status", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        catch(IOException ioe) {  Log.e("HTTPHandler", "Failed to fetch items", ioe);  }
+
+    }*/
+
     public void changeGoalExerciseToName(TextView view, UserGoal uGoal) {
 
         for (int j = 0; j < exercises.size(); j++) {
@@ -109,5 +138,4 @@ public class ViewGoalEntryActivity extends MenuActivity {
                 view.setText(exercises.get(j).gettype());
         }
     }
-
 }
