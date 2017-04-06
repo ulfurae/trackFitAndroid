@@ -1,8 +1,9 @@
 package com.example.ulfurae.ble1.entities;
 
-import java.util.Date;
 
-public class UserGoal {
+import java.io.Serializable;
+
+public class UserGoal implements Serializable {
 
     // Declare that this attribute is the id
 
