@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/goalEntryRoot"
     android:weightSum="2">
 
     <TextView
@@ -143,6 +144,15 @@
             android:text="..."
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textColor="?android:attr/editTextColor" />
+        <TextView
+            android:id="@+id/goalId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="6"
+            android:text="..."
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:textColor="?android:attr/editTextColor" />
 
 
     </GridLayout>
@@ -153,6 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:text="Delete Goal"
+        android:onClick="deleteGoal"
         android:textSize="20sp" />
 
     <Button
