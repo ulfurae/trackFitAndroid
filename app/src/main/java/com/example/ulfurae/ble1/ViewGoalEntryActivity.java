@@ -1,9 +1,16 @@
 package com.example.ulfurae.ble1;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
+import com.example.ulfurae.ble1.entities.Exercise;
+import com.example.ulfurae.ble1.entities.User;
 import com.example.ulfurae.ble1.entities.UserGoal;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by heidrunh on 5.4.2017.
@@ -13,14 +20,16 @@ public class ViewGoalEntryActivity extends MenuActivity {
 
     Bundle extras;
     UserGoal uGoal;
+    List<Exercise> exercises;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewgoalentry);
         extras = getIntent().getExtras();
-
+        userLoggedIn = (User) extras.getSerializable("userLoggedIn");
         uGoal = (UserGoal) extras.getSerializable("UserGoal");
+        exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         TextView startDateTxt = (TextView) findViewById(R.id.goalStartDate);
         startDateTxt.setText(uGoal.getStartDate());
@@ -35,5 +44,12 @@ public class ViewGoalEntryActivity extends MenuActivity {
         TextView goalStatusTxt = (TextView) findViewById(R.id.goalStatus);
         goalStatusTxt.setText(uGoal.getStatus());
 
+    }
+
+    public void goToGoalLog(View view) {
+        Intent intent = new Intent(this, ViewGoalActivity.class);
+        intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
+        intent.putExtra("exercises", (Serializable) exercises);
+        startActivity(intent);
     }
 }

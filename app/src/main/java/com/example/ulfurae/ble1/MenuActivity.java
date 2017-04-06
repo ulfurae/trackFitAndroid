@@ -19,8 +19,6 @@ import java.io.Serializable;
 // All other activities extended this class to have the menu
 public class MenuActivity extends AppCompatActivity {
 
-    String loggedInUser = "tester2";
-
     User userLoggedIn;
 
     //

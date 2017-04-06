@@ -38,6 +38,7 @@ import static java.security.AccessController.getContext;
 public class ViewGoalActivity extends MenuActivity {
 
     private static List<UserGoal> userGoal = new ArrayList<UserGoal>();
+    List<Exercise> exercises;
     Bundle extras;
 
     @Override
@@ -46,6 +47,7 @@ public class ViewGoalActivity extends MenuActivity {
 
         extras = getIntent().getExtras();
         userLoggedIn = (User) extras.getSerializable("userLoggedIn");
+        exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         setContentView(R.layout.activity_goallog);
 
@@ -98,6 +100,8 @@ public class ViewGoalActivity extends MenuActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), ViewGoalEntryActivity.class);
+                    intent.putExtra("userLoggedIn", (Serializable) userLoggedIn);
+                    intent.putExtra("exercises", (Serializable) exercises);
                     intent.putExtra("UserGoal", (Serializable)uGoal);
                     startActivity(intent);
                 }
@@ -158,7 +162,6 @@ public class ViewGoalActivity extends MenuActivity {
     }
 
     public void changeGoalExerciseToName(TextView view, UserGoal uGoal) {
-        List<Exercise> exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         for (int j = 0; j < exercises.size(); j++) {
             if (exercises.get(j).getId() == uGoal.getExerciseID())
