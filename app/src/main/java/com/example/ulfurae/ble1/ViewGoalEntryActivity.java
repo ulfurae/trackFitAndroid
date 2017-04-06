@@ -39,7 +39,7 @@ public class ViewGoalEntryActivity extends MenuActivity {
         exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         TextView goalIdTxt = (TextView) findViewById(R.id.goalId);
-        goalIdTxt.setText("Goal entry | " + Long.toString(uGoal.getId()));
+        goalIdTxt.setText(Long.toString(uGoal.getId()));
         TextView startDateTxt = (TextView) findViewById(R.id.goalStartDate);
         startDateTxt.setText(uGoal.getStartDate());
         TextView endDateTxt = (TextView) findViewById(R.id.goalEndDate);
