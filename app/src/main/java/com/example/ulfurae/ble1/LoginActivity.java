@@ -66,11 +66,11 @@ public class LoginActivity extends AppCompatActivity {
                     .appendQueryParameter("password", password.getText().toString())
                     .build().toString();
 
+            // call url with HTTP request and put the result into jsonString
             String jsonString = HTTPHandler.requestUrl(url);
 
-
             // if json string is NOT empty, then success
-            if (jsonString.isEmpty()==false) {
+            if (!jsonString.isEmpty()) {
                 Log.i("JSON STRING -", jsonString);
                 Toast.makeText(getApplicationContext(), "User logged in", Toast.LENGTH_SHORT).show();
                 JSONObject jsonBody = new JSONObject(jsonString);

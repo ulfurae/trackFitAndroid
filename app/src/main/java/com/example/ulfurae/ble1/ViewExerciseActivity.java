@@ -1,12 +1,15 @@
 package com.example.ulfurae.ble1;
 
 import android.app.AlertDialog;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.StrictMode;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +43,7 @@ public class ViewExerciseActivity extends MenuActivity {
 
     private static List<UserExercise> userExercise = new ArrayList<UserExercise>();
     Bundle extras;
+    List<Exercise>  exercises;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,7 @@ public class ViewExerciseActivity extends MenuActivity {
 
         extras = getIntent().getExtras();
         userLoggedIn = (User) extras.getSerializable("userLoggedIn");
+        exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         setContentView(R.layout.activity_exerciselog);
 
@@ -62,16 +67,19 @@ public class ViewExerciseActivity extends MenuActivity {
                     .appendQueryParameter("userId",userLoggedIn.getId().toString())
                     .build().toString();
 
+            // call url with HTTP request and put the result into jsonString
             String jsonString = HTTPHandler.requestUrl(url);
 
-            if(!jsonString.equals("null")){
+            // if json string is NOT empty, then success
+            if (!jsonString.isEmpty()) {
                 Log.i("HTTPHandler","Received JSON: "+jsonString);
                 JSONArray jsonArray = new JSONArray(jsonString);
-                System.out.println(jsonArray);
+
                 userExercise = JsonMapper.parseUserExercise(userExercise, jsonArray);
 
                 //Add exercise entries to the view
                 addToTable(userExercise);
+
             } else {
                 //Show the user that there was a failure getting the exercises
                 Toast.makeText(getApplicationContext(), "Failed getting exercises", Toast.LENGTH_SHORT).show();
@@ -114,18 +122,18 @@ public class ViewExerciseActivity extends MenuActivity {
 
             TextView exerciseDate = new TextView(this.getApplicationContext());
             exerciseDate.setLayoutParams(lp);
-            exerciseDate.setText(uExercise.getDate());
-            exerciseDate.setTextColor(0xFF000000);
+            SpannableString content = new SpannableString(uExercise.getDate());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            exerciseDate.setText(content);
+            exerciseDate.setTextColor(Color.BLUE);
 
             TextView exercise = new TextView(this.getApplicationContext());
             exercise.setLayoutParams(lp);
-            changeExerciseToName(exercise, uExercise);
-            exercise.setTextColor(0xFF000000);
+            exercise.setText(changeExerciseToName(uExercise));
+            exercise.setTextColor(Color.DKGRAY);
 
             TextView weight = new TextView(this.getApplicationContext());
             weight.setLayoutParams(lp);
-            //SpannableString spannableWeight = new SpannableString(Integer.toString(uExercise.getUnit2()));
-            //spannableWeight.setSpan(new UnderlineSpan(), 0, spannableWeight.length(), 0);
             weight.setText(Integer.toString(uExercise.getUnit2()));
             weight.setTextColor(Color.DKGRAY);
 
@@ -160,6 +168,7 @@ public class ViewExerciseActivity extends MenuActivity {
      * @param userExercise contains all information about  each exercise entry
      */
     public void showExerciseEntry(final UserExercise userExercise) {
+
         final AlertDialog alertDialog = new AlertDialog.Builder(ViewExerciseActivity.this).create();
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.from(this).inflate(R.layout.activity_viewexerciseentry, null);
@@ -183,7 +192,7 @@ public class ViewExerciseActivity extends MenuActivity {
         exerciseDate.setText(userExercise.getDate());
 
         TextView exercise = (TextView) dialogView.findViewById(R.id.exerciseInEntry);
-        changeExerciseToName(exercise, userExercise);
+        exercise.setText(changeExerciseToName(userExercise));
 
         TextView type = (TextView) dialogView.findViewById(R.id.typeInEntry);
         changeExerciseToType(type, userExercise);
@@ -199,17 +208,17 @@ public class ViewExerciseActivity extends MenuActivity {
         alertDialog.show();
     }
 
-    public void changeExerciseToName(TextView view, UserExercise uExercise) {
-        List<Exercise>  exercises = (List<Exercise>) extras.getSerializable("exercises");
+    public String changeExerciseToName( UserExercise uExercise) {
 
         for (int j = 0; j < exercises.size(); j++) {
             if (exercises.get(j).getId() == uExercise.getExerciseID())
-                view.setText(exercises.get(j).getName());
+                return exercises.get(j).getName();
+
         }
+        return null;
     }
 
     public void changeExerciseToType(TextView view, UserExercise uExercise) {
-        List<Exercise>  exercises = (List<Exercise>) extras.getSerializable("exercises");
 
         for (int j=0;j < exercises.size() ;j++) {
             if (exercises.get(j).getId() == uExercise.getExerciseID())

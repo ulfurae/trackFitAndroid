@@ -26,7 +26,7 @@ import com.example.ulfurae.ble1.entities.UserGoal;
 public class JsonMapper {
 
 
-        // function to parse JSON fetched from database to java object User
+        // function to parse JSON to java object User
         public static User parseUser(User user, JSONObject jsonBody)
                 throws JSONException, ParseException {
 
@@ -40,7 +40,7 @@ public class JsonMapper {
             return user;
         }
 
-        // function to parse JSON fetched from database to java object UserExercise
+        // function to parse JSON fetched to java object UserExercise
         public static List<UserExercise> parseUserExercise(List<UserExercise> userExcList, JSONArray jsonArray)
                 throws JSONException, ParseException {
 
@@ -64,7 +64,7 @@ public class JsonMapper {
             return userExcList;
         }
 
-        // function to parse JSON fetched from database to java object UserExercise
+        // function to parse JSON to list of java objects UserExercise
         public static List<Exercise> parseExerciseList(List<Exercise> excList, JSONArray jsonArray)
                 throws JSONException, ParseException {
 
@@ -82,19 +82,8 @@ public class JsonMapper {
             return excList;
         }
 
-        // function to parse JSON fetched from database to list (for dropdown list)
-        public static List<String> parseExercise(List<String> exercises, JSONArray jsonArray)
-                throws JSONException, ParseException {
 
-            for (int i=0; i < jsonArray.length(); i++) {
-                JSONObject oneObject = jsonArray.getJSONObject(i);
-                String name = oneObject.getString("name");
-                exercises.add(name);
-            }
-            return exercises;
-        }
-
-    // function to parse JSON fetched from database to java object UserExercise
+    // function to parse JSON to list of java objects UserGoal
     public static List<UserGoal> parseUserGoal(List<UserGoal> userGoalList, JSONArray jsonArray)
             throws JSONException, ParseException {
 

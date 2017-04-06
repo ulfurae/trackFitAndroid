@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.StrictMode;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.TableLayout;
@@ -63,18 +65,21 @@ public class ViewGoalActivity extends MenuActivity {
                     .appendQueryParameter("userId",userLoggedIn.getId().toString())
                     .build().toString();
 
+            // call url with HTTP request and put the result into jsonString
             String jsonString = HTTPHandler.requestUrl(url);
 
-            if(!jsonString.equals("null")){
+            // if json string is NOT empty, then success
+            if (!jsonString.isEmpty()) {
                 Log.i("HTTPHandler","Received JSON: "+jsonString);
                 JSONArray jsonArray = new JSONArray(jsonString);
-                System.out.println(jsonArray);
+
                 userGoal = JsonMapper.parseUserGoal(userGoal, jsonArray);
 
                 //Add exercise entries to the view
                 addToTable(userGoal);
+
             } else {
-                //Show the user that there was a failure getting the exercises
+                //Show the user that there was a failure getting the goal
                 Toast.makeText(getApplicationContext(), "Failed getting goals", Toast.LENGTH_SHORT).show();
             }
 
@@ -125,8 +130,10 @@ public class ViewGoalActivity extends MenuActivity {
 
             TextView goalEndDate = new TextView(this.getApplicationContext());
             goalEndDate.setLayoutParams(lp);
-            goalEndDate.setText(uGoal.getEndDate());
-            goalEndDate.setTextColor(0xFF000000);
+            SpannableString content = new SpannableString(uGoal.getEndDate());
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            goalEndDate.setText(content);
+            goalEndDate.setTextColor(Color.BLUE);
 
             TextView goalExercise = new TextView(this.getApplicationContext());
             goalExercise.setLayoutParams(lp);

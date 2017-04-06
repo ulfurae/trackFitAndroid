@@ -12,8 +12,8 @@ import java.net.URL;
  * Created by heidrunh on 2.3.2017.
  */
 
-// A class that handles taking in strings and sending them with HTTP to a connection and processing
-// the resulting bytes to a string and sending the results back
+// A class that handles taking in strings and sending them with a HTTP request to a connection and
+// processing the resulting bytes to a string and sending the results back
 public class HTTPHandler {
 
     public static byte[] requestUrlBytes(String urlSpec) throws IOException {
@@ -40,12 +40,15 @@ public class HTTPHandler {
 
             return out.toByteArray();
         }
-        finally { conn.disconnect(); }
+        finally {
+            conn.disconnect();
+        }
     }
 
-
     public static String requestUrl(String urlSpec) throws IOException {
+
         return new String(requestUrlBytes(urlSpec));
+
     }
 
 

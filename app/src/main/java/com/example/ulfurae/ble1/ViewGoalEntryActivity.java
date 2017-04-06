@@ -38,20 +38,22 @@ public class ViewGoalEntryActivity extends MenuActivity {
         uGoal = (UserGoal) extras.getSerializable("UserGoal");
         exercises = (List<Exercise>) extras.getSerializable("exercises");
 
+        TextView goalIdTxt = (TextView) findViewById(R.id.goalId);
+        goalIdTxt.setText("Goal entry | " + Long.toString(uGoal.getId()));
         TextView startDateTxt = (TextView) findViewById(R.id.goalStartDate);
         startDateTxt.setText(uGoal.getStartDate());
         TextView endDateTxt = (TextView) findViewById(R.id.goalEndDate);
         endDateTxt.setText(uGoal.getEndDate());
         TextView exerciseTxt = (TextView) findViewById(R.id.exerciseInEntry);
-        exerciseTxt.setText(Integer.toString(uGoal.getExerciseID()));
+        changeGoalExerciseToName(exerciseTxt, uGoal);
         TextView repsTxt = (TextView) findViewById(R.id.repetitions);
         repsTxt.setText(Integer.toString(uGoal.getUnit1()));
         TextView weightTxt = (TextView) findViewById(R.id.weight);
         weightTxt.setText(Integer.toString(uGoal.getUnit2()));
         TextView goalStatusTxt = (TextView) findViewById(R.id.goalStatus);
         goalStatusTxt.setText(uGoal.getStatus());
-        TextView goalIdTxt = (TextView) findViewById(R.id.goalId);
-        goalIdTxt.setText(Long.toString(uGoal.getId()));
+        TextView typeTxt = (TextView) findViewById(R.id.exerciseType);
+        changeGoalToType(typeTxt, uGoal);
 
     }
 
@@ -78,6 +80,7 @@ public class ViewGoalEntryActivity extends MenuActivity {
                     .appendQueryParameter("goalId", goalId)
                     .build().toString();
 
+            // call url with HTTP request and put the result into jsonString
             String jsonString = HTTPHandler.requestUrl(url);
 
             if(jsonString.equals("true")){
@@ -90,4 +93,21 @@ public class ViewGoalEntryActivity extends MenuActivity {
         }
         catch(IOException ioe) {  Log.e("HTTPHandler", "Failed to fetch items", ioe);  }
     }
+
+    public void changeGoalExerciseToName(TextView view, UserGoal uGoal) {
+
+        for (int j = 0; j < exercises.size(); j++) {
+            if (exercises.get(j).getId() == uGoal.getExerciseID())
+                view.setText(exercises.get(j).getName());
+        }
+    }
+
+    public void changeGoalToType(TextView view, UserGoal uExercise) {
+
+        for (int j=0;j < exercises.size() ;j++) {
+            if (exercises.get(j).getId() == uExercise.getExerciseID())
+                view.setText(exercises.get(j).gettype());
+        }
+    }
+
 }
